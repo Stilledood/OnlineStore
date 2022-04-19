@@ -2,6 +2,7 @@ from django.shortcuts import render,redirect,get_object_or_404
 from .models import Category,Product,Tag
 from django.views.generic import View
 from django.core.paginator import Paginator,EmptyPage,PageNotAnInteger
+from .forms import CategoryForm,TagForm,ProductForm,ReviewForm
 
 
 class CategoryList(View):
@@ -26,6 +27,65 @@ class CategoryDetails(View):
         category=get_object_or_404(self.model,slug__iexact=slug)
         context={'category':category}
         return render(request,self.template_name,context=context)
+
+
+class CategoryAdd(View):
+    '''Class to construct a view to add Category objects'''
+
+
+    template_name='onlinestore/category_add.html'
+    form_class=CategoryForm
+
+    def get(self,request):
+        return render(request,self.template_name,{'form':self.form_class()})
+
+    def post(self,request):
+        bound_form=self.form_class(request.POST)
+        if bound_form.is_valid():
+            new_category=bound_form.save()
+            return redirect(new_category.get_absolute_url())
+        else:
+            return render(request,self.template_name,{'form':bound_form})
+
+
+class CategoryChange(View):
+    '''Class to construct a view to change Category objects'''
+
+    model=Category
+    template_name='onlinestore/category_change.html'
+    form_class=CategoryForm
+
+    def get(self,request,slug):
+        category_obj=get_object_or_404(self.model,slug__iexact=slug)
+        return render(request,self.template_name,{'form':self.form_class(instance=category_obj),'category':category_obj})
+
+    def post(self,request,slug):
+        category_obj=get_object_or_404(self.model,slug__iexact=slug)
+        bound_form=self.form_class(request.POST,instance=category_obj)
+        if bound_form.is_valid():
+            updated_category=bound_form.save()
+            return redirect(updated_category.get_absolute_url())
+        else:
+            return render(request,self.template_name,{'form':bound_form,'category':category_obj})
+
+
+
+class CategoryDelete(View):
+    '''Class to construct a view to delete Category objects'''
+
+    model=Category
+    template_name='onlinestore/category_delete.html'
+
+    def get(self,request,slug):
+        category=get_object_or_404(self.model,slug__iexact=slug)
+        return render(request,self.template_name,{'category':category})
+
+    def post(self,request,slug):
+        category=get_object_or_404(self.model,slug__iexact=slug)
+        category.delete()
+        return redirect('category_list')
+    
+
 
 
 class TagList(View):
