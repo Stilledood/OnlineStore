@@ -102,7 +102,7 @@ class ProductDetails(View):
         product=get_object_or_404(self.model,pk=pk)
         context={'product':product}
         return render(request,self.template_name,context=context)
-    
+
 
 
 
