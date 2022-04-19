@@ -51,6 +51,58 @@ class TagDetails(View):
         return render(request,self.template_name,context=context)
 
 
+class ProductList(View):
+    '''Class to contsruct a view using pagination to display a list of Product objects'''
+
+    model = Product
+    template_name = 'onlinestore/product_list.html'
+    paginated_by = 10
+    page_kwargs = 'page'
+
+    def get(self, request):
+        product_list = self.model.objects.all()
+        paginator = Paginator(product_list, self.page_kwargs)
+        page_number = request.GET.get(self.page_kwargs)
+
+        try:
+            page = paginator.page(page_number)
+        except PageNotAnInteger:
+            page = paginator.page(1)
+        except EmptyPage:
+            page = paginator.page(paginator.num_pages)
+
+        if page.has_previous():
+            previous_page_url = "?{pkw}={n}".format(pkw=self.page_kwargs, n=page.previous_page_number())
+        else:
+            previous_page_url = None
+
+        if page.has_next():
+            next_page_url = "?{pkw}={n}".format(pkw=self.page_kwargs, n=page.next_page_number())
+        else:
+            next_page_url = None
+
+        context = {
+            'has_other_page': page.has_other_pages(),
+            'paginator': paginator,
+            'previous_page': previous_page_url,
+            'next_page': next_page_url,
+            'product_list': page
+        }
+
+        return render(request, self.template_name, context=context)
+
+
+class ProductDetails(View):
+    '''Class to construct a view ti display details for a product object'''
+
+    model=Product
+    template_name='onlinestore/product_details.html'
+
+    def get(self,request,pk):
+        product=get_object_or_404(self.model,pk=pk)
+        context={'product':product}
+        return render(request,self.template_name,context=context)
+    
 
 
 
