@@ -15,10 +15,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include,re_path
-from onlinestore import urls as onlinestore_urls
+from onlinestore.urls import category,product,tag
+from django.contrib.flatpages import urls as flatpages_urls
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    re_path(r'^',include(onlinestore_urls))
+    re_path(r'^store/',include(product)),
+    re_path(r'^tag/',include(tag)),
+    re_path(r'^category/',include(category)),
+    re_path(r'^',include(flatpages_urls)),
 
 ]

@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.flatpages',
+    'django.contrib.sites',
     'onlinestore',
     'blog',
     'contact',
@@ -135,3 +137,6 @@ EMAIL_SUBJECT_PREFIX='[Store]'
 MANAGERS=(
     ('Us','ourselves@store.com'),
 )
+# Flatpages and sites
+SITE_ID=1
+
