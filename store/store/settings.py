@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'onlinestore',
     'blog',
     'contact',
+    'core',
 
 ]
 
