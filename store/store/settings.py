@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'onlinestore',
     'blog',
+    'contact',
 
 ]
 
@@ -125,3 +126,12 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Email settings
+EMAIL_BACKEND='django.core.mail.backends.console.EmailBackend'
+SERVER_EMAIL='contact@store.com'
+DEFAULT_FROM_EMAIL='no_reply@store.com'
+EMAIL_SUBJECT_PREFIX='[Store]'
+MANAGERS=(
+    ('Us','ourselves@store.com'),
+)
