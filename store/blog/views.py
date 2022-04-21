@@ -2,6 +2,7 @@ from django.shortcuts import render,get_object_or_404,redirect
 from django.views.generic import View
 from .models import Post,Commnent
 from django.core.paginator import Paginator,EmptyPage,PageNotAnInteger
+from .forms import PostForm,CommnetForm
 
 
 
@@ -51,8 +52,23 @@ class PostDetails(View):
 
     model=Post
     template_name='blog/post_details.html'
+    form_class=CommnetForm
 
     def get(self,request,pk):
         post=get_object_or_404(self.model,pk=pk)
-        return render(request,self.template_name,{'post':post})
+        return render(request,self.template_name,{'post':post,'form':self.form_class()})
+
+    def post(self,request,pk):
+        post=get_object_or_404(self.model,pk=pk)
+        bound_form=self.form_class(request.POST)
+        if bound_form.is_valid():
+            new_comm=bound_form.save(commit=False)
+            new_comm.post=post
+            new_comm.author=self.request.user
+            new_comm.save()
+            return redirect(post.get_absolute_url())
+        else:
+            return render(request,self.template_name,{'post':post,'form':bound_form})
+
+
 
