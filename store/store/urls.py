@@ -18,6 +18,8 @@ from django.urls import path,include,re_path
 from onlinestore.urls import category,product,tag
 from django.contrib.flatpages import urls as flatpages_urls
 from django.conf import settings
+from django.conf.urls.static import static
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),

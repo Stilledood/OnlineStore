@@ -13,7 +13,7 @@ def add_flatpages_data(apps,schema_editor):
     FlatPage=apps.get_model('flatpages','FlatPage')
     Site=apps.get_model('sites','Site')
     site_id=getattr(settings,'SITE_ID',1)
-    current_site=Site.objects.get(ph=site_id)
+    current_site=Site.objects.get(pk=site_id)
     for page_dict in FLATPAGES:
         title=page_dict['title']
         url=page_dict['url']

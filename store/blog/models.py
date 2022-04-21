@@ -50,6 +50,6 @@ class Commnent(models.Model):
 
     def get_delete_url(self):
         return reverse('commnet_delete',kwargs={'pk':self.pk})
-    
+
 
 
