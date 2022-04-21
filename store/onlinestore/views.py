@@ -302,7 +302,7 @@ class ReviewDelete(View):
         product=review.product
         review.delete()
         return redirect(product.get_absolute_url())
-    
+
 
 
 

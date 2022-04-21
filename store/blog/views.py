@@ -108,7 +108,7 @@ class PostUpdate(View):
             return redirect(new_post.get_absolute_url())
         else:
             return render(request,self.template_name,{'post':post,'form':bound_form})
-        
+
 
 
 class PostDelete(View):
@@ -126,3 +126,19 @@ class PostDelete(View):
         post.delete()
         return redirect('post_list')
 
+
+class CommentDelete(View):
+    '''Class to create a view to delete comments objects'''
+
+    model=Commnent
+    template_name='blog/comment_delete.html'
+
+    def get(self,request,pk):
+        comm=get_object_or_404(self.model,pk=pk)
+        return render(request,self.template_name,{'comm':comm})
+
+    def post(self,request,pk):
+        comm=get_object_or_404(self.model,pk=pk)
+        post=comm.post
+        comm.delete()
+        return redirect(post.get_absolute_url())
