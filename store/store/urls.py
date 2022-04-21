@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path,include,re_path
 from onlinestore.urls import category,product,tag
 from django.contrib.flatpages import urls as flatpages_urls
+from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -26,3 +27,6 @@ urlpatterns = [
     re_path(r'^',include(flatpages_urls)),
 
 ]
+
+if settings.DEBUG:
+    urlpatterns+=static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
