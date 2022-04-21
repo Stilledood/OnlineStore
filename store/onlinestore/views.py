@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect,get_object_or_404
-from .models import Category,Product,Tag
+from .models import Category,Product,Tag,Review
 from django.views.generic import View
 from django.core.paginator import Paginator,EmptyPage,PageNotAnInteger
 from .forms import CategoryForm,TagForm,ProductForm,ReviewForm
@@ -110,6 +110,61 @@ class TagDetails(View):
         context={'tag':tag}
         return render(request,self.template_name,context=context)
 
+class TagAdd(View):
+    '''Class to create a view to add Tag objects'''
+
+    model=Tag
+    template_name='onlinestore/tag_add.html'
+    form_class=TagForm
+
+    def get(self,request):
+        return render(request,self.template_name,{'form':self.form_class()})
+
+    def post(self,request):
+        bound_form=self.form_class(request.POST)
+        if bound_form.is_valid():
+            new_tag=bound_form.save()
+            return redirect(new_tag.get_absolute_url())
+        else:
+            return render(request,self.template_name,{'form':bound_form})
+
+class TagUpdate(View):
+    '''Class to construct a view to change Tag objects'''
+
+    model=Tag
+    template_name='onlinestore/tag_update.html'
+    form_class=TagForm
+
+    def get(self,request,slug):
+        tag=get_object_or_404(self.model,slug__iexact=slug)
+        return  render(request,self.template_name,{'form':self.form_class(instance=tag),'tag':tag})
+
+    def post(self,request,slug):
+        tag=get_object_or_404(self.model,slug__iexact=slug)
+        bound_form=self.form_class(request.POST,instance=tag)
+        if bound_form.is_valid():
+            updated_tag=bound_form.save()
+            return redirect(updated_tag.get_absolute_url())
+        else:
+            return render(request,self.template_name,{'form':bound_form,'tag':tag})
+
+class TagDelete(View):
+    '''Class to create a view to delete a tag object'''
+
+    model=Tag
+    template_name='onlinestore/tag_delete.html'
+
+    def get(self,request,slug):
+        tag=get_object_or_404(self.model,slug__iexact=slug)
+        return render(request,self.template_name,{'tag':tag})
+
+    def post(self,request,slug):
+        tag=get_object_or_404(self.model,slug__iexact=slug)
+        tag.delete()
+        return redirect('tag_list')
+
+
+
 
 class ProductList(View):
     '''Class to contsruct a view using pagination to display a list of Product objects'''
@@ -157,11 +212,99 @@ class ProductDetails(View):
 
     model=Product
     template_name='onlinestore/product_details.html'
+    form_class=ReviewForm
 
     def get(self,request,pk):
         product=get_object_or_404(self.model,pk=pk)
-        context={'product':product}
+        context={'product':product,
+                 'form':self.form_class()}
         return render(request,self.template_name,context=context)
+
+    def get(self,request,pk):
+        product=get_object_or_404(self.model,pk=pk)
+        bound_form=self.form_class(request.POST)
+        if bound_form.is_valid():
+            new_comm=bound_form.save(commit=False)
+            new_comm.product=product
+            new_comm.user=self.request.user
+            new_comm.save()
+            return redirect(product.get_absolute_url())
+        else:
+            return render(request,self.template_name,{'form':bound_form,'product':product})
+
+
+class ProductAdd(View):
+    '''Class to construct a view to add Product objects'''
+
+    model=Product
+    template_name='onlinestore/product_add.html'
+    form_class=ProductForm
+
+    def get(self,request):
+        return render(request,self.template_name,{'form':self.form_class()})
+
+    def post(self,request):
+        bound_form=self.form_class(request.POST)
+        if bound_form.is_valid():
+            new_product=bound_form.save()
+            return redirect(new_product.get_absolute_url())
+        else:
+            return render(request,self.template_name,{'form':bound_form})
+
+class ProductUpdate(View):
+    '''Class to construct a view to change a Product object'''
+
+    model=Product
+    template_name='onlinestore/product_change.html'
+    form_class=ProductForm
+
+    def get(self,request,pk):
+        product=get_object_or_404(self.model,pk=pk)
+        return render(request,self.template_name,{'form':self.form_class(instance=product),'product':product})
+
+    def post(self,request,pk):
+        product=get_object_or_404(self.model,pk=pk)
+        bound_form=self.form_class(request.POST,instance=product)
+        if bound_form.is_valid():
+            updated_product=bound_form.save()
+            return redirect(updated_product.get_absolute_url())
+        else:
+            return render(request,self.template_name,{'form':bound_form,'product':product})
+
+
+class ProductDelete(View):
+    '''Class to create a view for deleting Product objects'''
+
+    model=Product
+    template_name='onlinestore/product_delete.html'
+
+    def get(self,request,pk):
+        product=get_object_or_404(self.model,pk=pk)
+        return render(request,self.template_name,{'product':product})
+
+    def post(self,request,pk):
+        product=get_object_or_404(self.model,pk=pk)
+        product.delete()
+        return redirect('product_list')
+
+class ReviewDelete(View):
+    '''Class to construct a vierw to delete Review objects'''
+
+    model=Review
+    template_name='onlinestore/review_delete.html'
+
+    def get(self,request,pk):
+        review=get_object_or_404(self.model,pk=pk)
+        return render(request,self.template_name,{'review':review})
+
+    def post(self,request,pk):
+        review=get_object_or_404(self.model,pk=pk)
+        product=review.product
+        review.delete()
+        return redirect(product.get_absolute_url())
+    
+
+
 
 
 
