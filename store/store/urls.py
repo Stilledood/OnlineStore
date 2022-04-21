@@ -19,6 +19,7 @@ from onlinestore.urls import category,product,tag
 from django.contrib.flatpages import urls as flatpages_urls
 from django.conf import settings
 from django.conf.urls.static import static
+from blog import urls as blog_urls
 
 
 urlpatterns = [
@@ -27,6 +28,7 @@ urlpatterns = [
     re_path(r'^tag/',include(tag)),
     re_path(r'^category/',include(category)),
     re_path(r'^',include(flatpages_urls)),
+    re_path(r'^blog/',include(blog_urls))
 
 ]
 
