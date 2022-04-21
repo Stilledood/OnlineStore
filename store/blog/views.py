@@ -70,5 +70,59 @@ class PostDetails(View):
         else:
             return render(request,self.template_name,{'post':post,'form':bound_form})
 
+class PostAdd(View):
+    '''Class to construct a view to add post objects'''
 
+    model=Post
+    template_name='blog/post_add.html'
+    form_class=PostForm
+
+    def get(self,request):
+        return render(request,self.template_name,{'form':self.form_class()})
+
+    def post(self,request):
+        bound_form=self.form_class(request.POST)
+        if bound_form.is_valid():
+            new_post=bound_form.save()
+            return redirect(new_post.get_absolute_url())
+        else:
+            return render(request,self.template_name,{'form':bound_form})
+
+
+class PostUpdate(View):
+    '''Class to construct a view to update a post object'''
+
+    model=Post
+    template_name='blog/post_update.html'
+    form_class=PostForm
+
+    def get(self,request,pk):
+        post=get_object_or_404(self.model,pk=pk)
+        return render(request,self.template_name,{'post':post,'form':self.form_class(instance=post)})
+
+    def post(self,request,pk):
+        post=get_object_or_404(self.model,pk=pk)
+        bound_form=self.form_class(request.POST,instance=post)
+        if bound_form.is_valid():
+            new_post=bound_form.save()
+            return redirect(new_post.get_absolute_url())
+        else:
+            return render(request,self.template_name,{'post':post,'form':bound_form})
+        
+
+
+class PostDelete(View):
+    '''Class to construct a view to delete post objects'''
+
+    model = Post
+    template_name = 'blog/post_delete.html'
+
+    def get(self, request, pk):
+        post = get_object_or_404(self.model, pk=pk)
+        return render(request, self.template_name, {'post': post})
+
+    def post(self, request, pk):
+        post = get_object_or_404(self.model, pk=pk)
+        post.delete()
+        return redirect('post_list')
 
