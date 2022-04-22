@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 from pathlib import Path
 import os
+from .log_filters import ManagementFilter
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -62,7 +63,7 @@ ROOT_URLCONF = 'store.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR,'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -124,8 +125,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATIC_URL = 'static/'
-STATIC_DIRS=[
-    os.path.join(BASE_DIR,'static')
+STATICFILES_DIRS=[
+    os.path.join(BASE_DIR,'static'),
 ]
 STATIC_ROOT='staticfiles'
 
@@ -148,4 +149,36 @@ MANAGERS=(
 )
 # Flatpages and sites
 SITE_ID=1
+
+verbose=("[%(asctime)] %(levelname)s"
+         "[%(name)s:%(lineno)s] %(message)s")
+
+LOGGING={
+    'version':1,
+    'disable_existing_loggers':False,
+    'filters':{
+        'remove_migration_sql':{
+            '()':ManagementFilter
+
+        },
+    },
+    'handlers':{
+        'console':{
+            'class':'logging.StreamHandler'
+        }
+    },
+    'formatters':{
+        'verbose':{
+            'format':verbose,
+            'datefmt':"%Y-%b-%d %H:%M:%S"
+        }
+    },
+    'loggers':{
+        'django':{
+            'handlers':['console'],
+            'level':'DEBUG',
+            'formatter':'verbose'
+        }
+    }
+}
 
