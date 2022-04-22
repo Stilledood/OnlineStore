@@ -176,7 +176,7 @@ class ProductList(View):
 
     def get(self, request):
         product_list = self.model.objects.all()
-        paginator = Paginator(product_list, self.page_kwargs)
+        paginator = Paginator(product_list, self.paginated_by)
         page_number = request.GET.get(self.page_kwargs)
 
         try:
