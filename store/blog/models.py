@@ -18,7 +18,9 @@ class Post(models.Model):
     class Meta:
         ordering=['-date_added','title']
         get_latest_by='title'
-
+        permissions = (
+            ('view_future_post', 'Can view unpublished posts'),
+        )
     def __str__(self):
         return self.title[:50]
 
@@ -44,6 +46,7 @@ class Commnent(models.Model):
     class Meta:
         ordering=['-date_added']
         get_latest_by='date_added'
+
 
     def __str__(self):
         return self.text[:50]
