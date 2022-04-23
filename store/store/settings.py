@@ -187,4 +187,4 @@ LOGGING={
 # Authentification settings
 LOGIN_URL=reverse_lazy('dj-auth:login')
 LOGOUT_URL=reverse_lazy('dj-auth:logout')
-LOGIN_REDIRECT_URL='next'
+LOGIN_REDIRECT_URL=reverse_lazy('dj-auth:login')
