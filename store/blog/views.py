@@ -3,6 +3,9 @@ from django.views.generic import View
 from .models import Post,Commnent
 from django.core.paginator import Paginator,EmptyPage,PageNotAnInteger
 from .forms import PostForm,CommnetForm
+from user.decorators import custom_login_required,custom_permission_required
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 
 
 
@@ -58,6 +61,7 @@ class PostDetails(View):
         post=get_object_or_404(self.model,pk=pk)
         return render(request,self.template_name,{'post':post,'form':self.form_class()})
 
+    @method_decorator(login_required)
     def post(self,request,pk):
         post=get_object_or_404(self.model,pk=pk)
         bound_form=self.form_class(request.POST)
@@ -70,6 +74,8 @@ class PostDetails(View):
         else:
             return render(request,self.template_name,{'post':post,'form':bound_form})
 
+
+@custom_permission_required('blog.add_post')
 class PostAdd(View):
     '''Class to construct a view to add post objects'''
 
@@ -88,7 +94,7 @@ class PostAdd(View):
         else:
             return render(request,self.template_name,{'form':bound_form})
 
-
+@custom_permission_required('blog.change_post')
 class PostUpdate(View):
     '''Class to construct a view to update a post object'''
 
@@ -110,7 +116,7 @@ class PostUpdate(View):
             return render(request,self.template_name,{'post':post,'form':bound_form})
 
 
-
+@custom_permission_required('blog.delete_post')
 class PostDelete(View):
     '''Class to construct a view to delete post objects'''
 
@@ -126,7 +132,7 @@ class PostDelete(View):
         post.delete()
         return redirect('post_list')
 
-
+@custom_permission_required('blog.delete_comment')
 class CommentDelete(View):
     '''Class to create a view to delete comments objects'''
 
