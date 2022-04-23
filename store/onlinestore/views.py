@@ -3,6 +3,9 @@ from .models import Category,Product,Tag,Review
 from django.views.generic import View
 from django.core.paginator import Paginator,EmptyPage,PageNotAnInteger
 from .forms import CategoryForm,TagForm,ProductForm,ReviewForm
+from user.decorators import custom_login_required,custom_permission_required
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 
 
 class CategoryList(View):
@@ -28,7 +31,7 @@ class CategoryDetails(View):
         context={'category':category}
         return render(request,self.template_name,context=context)
 
-
+@custom_permission_required('onlinestore.add_category')
 class CategoryAdd(View):
     '''Class to construct a view to add Category objects'''
 
@@ -48,6 +51,8 @@ class CategoryAdd(View):
             return render(request,self.template_name,{'form':bound_form})
 
 
+
+@custom_permission_required('onlinestore.change_category')
 class CategoryChange(View):
     '''Class to construct a view to change Category objects'''
 
@@ -70,6 +75,7 @@ class CategoryChange(View):
 
 
 
+@custom_permission_required('onlinestore.delete_category')
 class CategoryDelete(View):
     '''Class to construct a view to delete Category objects'''
 
@@ -88,6 +94,7 @@ class CategoryDelete(View):
 
 
 
+
 class TagList(View):
     '''Class to display a list of all Tag Objects'''
 
@@ -98,6 +105,8 @@ class TagList(View):
         tag_list=self.model.objects.all()
         context={'tag_list':tag_list}
         return render(request,self.template_name,context=context)
+
+
 
 class TagDetails(View):
     '''Class to display all the details for a Tag object'''
@@ -110,6 +119,9 @@ class TagDetails(View):
         context={'tag':tag}
         return render(request,self.template_name,context=context)
 
+
+
+@custom_permission_required('onlinestore.add_tag')
 class TagAdd(View):
     '''Class to create a view to add Tag objects'''
 
@@ -128,6 +140,9 @@ class TagAdd(View):
         else:
             return render(request,self.template_name,{'form':bound_form})
 
+
+
+@custom_permission_required('onlinestore.change_tag')
 class TagUpdate(View):
     '''Class to construct a view to change Tag objects'''
 
@@ -148,6 +163,9 @@ class TagUpdate(View):
         else:
             return render(request,self.template_name,{'form':bound_form,'tag':tag})
 
+
+
+@custom_permission_required('onlinestore.delete_tag')
 class TagDelete(View):
     '''Class to create a view to delete a tag object'''
 
@@ -162,6 +180,7 @@ class TagDelete(View):
         tag=get_object_or_404(self.model,slug__iexact=slug)
         tag.delete()
         return redirect('tag_list')
+
 
 
 
@@ -207,6 +226,7 @@ class ProductList(View):
         return render(request, self.template_name, context=context)
 
 
+
 class ProductDetails(View):
     '''Class to construct a view ti display details for a product object'''
 
@@ -220,7 +240,9 @@ class ProductDetails(View):
                  'form':self.form_class()}
         return render(request,self.template_name,context=context)
 
-    def get(self,request,pk):
+
+    @method_decorator(login_required)
+    def post(self,request,pk):
         product=get_object_or_404(self.model,pk=pk)
         bound_form=self.form_class(request.POST)
         if bound_form.is_valid():
@@ -233,6 +255,8 @@ class ProductDetails(View):
             return render(request,self.template_name,{'form':bound_form,'product':product})
 
 
+
+@custom_permission_required('onlinestore.add_product')
 class ProductAdd(View):
     '''Class to construct a view to add Product objects'''
 
@@ -251,6 +275,9 @@ class ProductAdd(View):
         else:
             return render(request,self.template_name,{'form':bound_form})
 
+
+
+@custom_permission_required('onlinestore.change_product')
 class ProductUpdate(View):
     '''Class to construct a view to change a Product object'''
 
@@ -272,6 +299,9 @@ class ProductUpdate(View):
             return render(request,self.template_name,{'form':bound_form,'product':product})
 
 
+
+
+@custom_permission_required('onlinestore.delete_product')
 class ProductDelete(View):
     '''Class to create a view for deleting Product objects'''
 
@@ -287,6 +317,9 @@ class ProductDelete(View):
         product.delete()
         return redirect('product_list')
 
+
+
+@custom_permission_required('onlinestore.delete_review')
 class ReviewDelete(View):
     '''Class to construct a vierw to delete Review objects'''
 
