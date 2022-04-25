@@ -1,0 +1,9 @@
+{% extends parent_template|default:'user/base_user.html' %}
+{% block content %}
+<h3>Dissable Account</h3>
+<form action="{% url 'dj-auth:dissable_account' %}"
+      method="post">
+    {% csrf_token %}
+    <button type="submit">Dissable Account</button>
+</form>
+{% endblock content %}
