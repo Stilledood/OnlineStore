@@ -155,34 +155,33 @@ SITE_ID=1
 verbose=("[%(asctime)] %(levelname)s"
          "[%(name)s:%(lineno)s] %(message)s")
 
-LOGGING={
-    'version':1,
-    'disable_existing_loggers':False,
-    'filters':{
-        'remove_migration_sql':{
-            '()':ManagementFilter
+#LOGGING={
+    #'version':1,
+    ##'filters':{
+        #'remove_migration_sql':{
+            #'()':ManagementFilter
 
-        },
-    },
-    'handlers':{
-        'console':{
-            'class':'logging.StreamHandler'
-        }
-    },
-    'formatters':{
-        'verbose':{
-            'format':verbose,
-            'datefmt':"%Y-%b-%d %H:%M:%S"
-        }
-    },
-    'loggers':{
-        'django':{
-            'handlers':['console'],
-            'level':'DEBUG',
-            'formatter':'verbose'
-        }
-    }
-}
+        #},
+    #},
+    #'handlers':{
+        #'console':{
+            #'class':'logging.StreamHandler'
+       # }
+   # },
+    #'formatters':{
+        #'verbose':{
+            #'format':verbose,
+            #'datefmt':"%Y-%b-%d %H:%M:%S"
+        #}
+    #},
+    #'loggers':{
+        #'django':{
+            #'handlers':['console'],
+            #'level':'DEBUG',
+           # 'formatter':'verbose'
+       # }
+    #}
+#}
 
 # Authentification settings
 LOGIN_URL=reverse_lazy('dj-auth:login')

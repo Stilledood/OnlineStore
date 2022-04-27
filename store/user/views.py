@@ -29,6 +29,6 @@ class DisableAccount(View):
         logout(request)
         return redirect(self.success_url)
 
-    
+
 
 

@@ -36,3 +36,8 @@ urlpatterns = [
 
 if settings.DEBUG:
     urlpatterns+=static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
+
+
+admin.site.site_header='Store Admin Panel'
+admin.site.site_title='Store Admin'
+
