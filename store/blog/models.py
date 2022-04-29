@@ -31,6 +31,8 @@ class Post(models.Model):
         permissions = (
             ('view_future_post', 'Can view unpublished posts'),
         )
+
+
     def __str__(self):
         return self.title[:50]
 
@@ -42,6 +44,8 @@ class Post(models.Model):
 
     def get_delete_url(self):
         return reverse('post_delete',kwargs={'pk':self.pk})
+
+
 
 
 
