@@ -2,6 +2,15 @@ from django.db import models
 from django.shortcuts import reverse
 from django.conf import settings
 from onlinestore.models import Tag,Product
+from datetime import date
+
+
+class PostQueryset(models.QuerySet):
+    '''Class to define a custom queryset'''
+
+    def published(self):
+        return self.filter(date_added__lte=date.today())
+
 
 
 class Post(models.Model):
@@ -14,6 +23,7 @@ class Post(models.Model):
     image=models.ImageField(upload_to='blog_images',default=None)
     tags=models.ManyToManyField(Tag)
     products=models.ManyToManyField(Product)
+    objects=PostQueryset.as_manager()
 
     class Meta:
         ordering=['-date_added','title']
