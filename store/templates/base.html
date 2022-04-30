@@ -319,6 +319,13 @@
 		<!--welcome-hero end -->
 
 		<!--populer-products start -->
+        {% if messages %}
+            <ul class="messages">
+				{% for message in messages %}
+					<li>{{message}}</li>
+			</ul>
+				{% endfor %}
+		{% endif %}
 		{% block content %}
 		{% endblock content %}
 		<section id="populer-products" class="populer-products">
