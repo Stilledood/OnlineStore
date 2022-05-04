@@ -81,6 +81,19 @@ class Product(models.Model):
     def get_delete_url(self):
         return reverse('product_delete',kwargs={'pk':self.pk})
 
+    def format_name(self):
+        return self.name.title()
+
+    def format_description(self):
+        if len(str(self.description)) > 20:
+            short=str(self.description)[:20]+'.......'
+            return short
+        else:
+            return str(self.description)
+
+    def format_price(self):
+        return (self.price +'USD')
+
 
 class Review(models.Model):
     '''Class to construct a model for reviews objects'''
