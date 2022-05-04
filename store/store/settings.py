@@ -14,7 +14,9 @@ from pathlib import Path
 import os
 from .log_filters import ManagementFilter
 from django.urls import reverse_lazy
+import mimetypes
 
+mimetypes.add_type("application/javascript", ".js", True)
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -42,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.flatpages',
     'django.contrib.sites',
+    'debug_toolbar',
     'onlinestore',
     'blog',
     'contact',
@@ -51,6 +54,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -58,6 +62,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
 ]
 
 ROOT_URLCONF = 'store.urls'
@@ -189,3 +194,17 @@ verbose=("[%(asctime)] %(levelname)s"
 LOGIN_URL=reverse_lazy('dj-auth:login')
 LOGOUT_URL=reverse_lazy('dj-auth:logout')
 LOGIN_REDIRECT_URL=reverse_lazy('dj-auth:login')
+INTERNAL_IPS=[
+    'localhost',
+]
+
+DEBUG_TOOLBAR_PATCH_SETTINGS = False
+
+
+def show_toolbar(request):
+    return True
+
+
+DEBUG_TOOLBAR_CONFIG = {
+    "SHOW_TOOLBAR_CALLBACK" : show_toolbar,
+}

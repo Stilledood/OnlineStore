@@ -21,7 +21,13 @@ from django.conf import settings
 from django.conf.urls.static import static
 from blog import urls as blog_urls
 from user import urls as user_urls
+from blog.feeds import AtomPostFeed,RssPostFeed
 
+
+sitenews=[
+    re_path(r'^atom/$',AtomPostFeed(),name='blog_atom_feed'),
+    re_path(r'^rss/$',RssPostFeed(),name='blog_rss_feed'),
+]
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -30,13 +36,18 @@ urlpatterns = [
     re_path(r'^category/',include(category)),
     re_path(r'^user/',include(user_urls,namespace='dj-auth')),
     re_path(r'^blog/',include(blog_urls)),
+    re_path(r'^sitenews/',include(sitenews))
+
 
 
 ]
 
 if settings.DEBUG:
     urlpatterns+=static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
-
+    import debug_toolbar
+    urlpatterns+=[
+        re_path(r'^__debug__/',include(debug_toolbar.urls))
+    ]
 
 admin.site.site_header='Store Admin Panel'
 admin.site.site_title='Store Admin'

@@ -45,6 +45,18 @@ class Post(models.Model):
     def get_delete_url(self):
         return reverse('post_delete',kwargs={'pk':self.pk})
 
+    def formatted_title(self):
+        return self.title.title()
+
+    def format_text(self):
+        if len(self.text)>20:
+            short=self.text[:20]+'.....'
+            return short
+        else:
+            return self.text
+
+
+
 
 
 
