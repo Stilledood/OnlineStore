@@ -1,0 +1,14 @@
+{% extends parent_template|default:'onlinestore/onlinestore_base.html' %}
+{% block content %}
+<h3>{{product.title}}</h3>
+<h2>{{product.description}}</h2>
+<h2>{{product.price}}</h2>
+{% if perms.onlinestore.add_product  %}
+    <form action="{% url 'product_details' pk=product.pk %}"
+          method="post">
+        {% csrf_token %}
+        {{form.as_p}}
+        <button type="submit">Post review</button>
+    </form>
+{% endif %}
+{% endblock content %}

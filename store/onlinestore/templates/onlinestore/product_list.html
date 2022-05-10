@@ -1,1 +1,7 @@
 {% extends parent_template|default:'onlinestore/onlinestore_base.html' %}
+{% block content %}
+{% for product in product_list %}
+    <h3>{{product.name}}</h3>
+    <a href="{{product.get_absolute_url}}">Details</a>
+{% endfor %}
+{% endblock content %}

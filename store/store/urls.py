@@ -22,6 +22,8 @@ from django.conf.urls.static import static
 from blog import urls as blog_urls
 from user import urls as user_urls
 from blog.feeds import AtomPostFeed,RssPostFeed
+from .sitemaps import sitemaps
+from django.contrib.sitemaps.views import index,sitemap as sitemap_view
 
 
 sitenews=[
@@ -36,7 +38,10 @@ urlpatterns = [
     re_path(r'^category/',include(category)),
     re_path(r'^user/',include(user_urls,namespace='dj-auth')),
     re_path(r'^blog/',include(blog_urls)),
-    re_path(r'^sitenews/',include(sitenews))
+    re_path(r'^sitenews/',include(sitenews)),
+    re_path(r'^sitemap.xml$',sitemap_view,{'sitemaps':sitemaps},name='django.contrib.sitemaps.views.sitemap'),
+
+
 
 
 
