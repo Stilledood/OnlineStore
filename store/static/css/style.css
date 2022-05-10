@@ -467,7 +467,7 @@ ul.cart-list > li.total {
     text-align: center;
     overflow:hidden;
 }
-.single-populer-product-img.mt40{margin-top: 40px;}
+.single-populer-product-img.mt40{margin-top: 50px;overflow:hidden;max_height:50px;}
 .single-inner-populer-products{margin-top: 40px;padding: 0 45px 0 30px;text-align: left;}
 
 .single-populer-products h2 a {

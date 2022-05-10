@@ -38,7 +38,7 @@ class CategoryAdmin(admin.ModelAdmin):
     search_fields = ('slug',)
     fieldsets = (
         ('Principal',{
-            'fields':('name','slug',)
+            'fields':('name','slug','image')
         }),
     )
 

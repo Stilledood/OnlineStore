@@ -24,6 +24,7 @@ from user import urls as user_urls
 from blog.feeds import AtomPostFeed,RssPostFeed
 from .sitemaps import sitemaps
 from django.contrib.sitemaps.views import index,sitemap as sitemap_view
+from .views import GeneralView
 
 
 sitenews=[
@@ -32,6 +33,7 @@ sitenews=[
 ]
 
 urlpatterns = [
+    path('',GeneralView.as_view(),name='general_view'),
     path('admin/', admin.site.urls),
     re_path(r'^store/',include(product)),
     re_path(r'^tag/',include(tag)),

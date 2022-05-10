@@ -12,7 +12,7 @@ class GeneralView(View):
         category_short_list=Category.objects.all()
         new_arrivals=Product.objects.all()[:8]
         featured_products=Product.objects.filter(featured=True)
-        latest_blog=Post.object.all()[:3]
+        latest_blog=Post.objects.all()[:3]
         context={
             'category_list':category_short_list,
             'new_arrivals':new_arrivals,
