@@ -15,6 +15,7 @@ class Profile(models.Model):
     image=models.ImageField(upload_to='user_images',null=True)
     name=models.CharField(max_length=128)
     username=models.CharField(max_length=128)
+    email_confirmed=models.BooleanField(default=False)
 
 
     def __str__(self):

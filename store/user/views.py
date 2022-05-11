@@ -5,7 +5,7 @@ from django.contrib.auth import get_user,logout
 from django.contrib.auth.decorators import login_required
 from django.template.response import TemplateResponse
 from django.utils.decorators import method_decorator
-from django.views.decorators.csrf import
+from django.views.decorators.csrf import csrf_protect
 from .forms import SignUpForm,ProfileForm
 from .models import Profile
 from django.contrib.sites.shortcuts import get_current_site
@@ -121,7 +121,7 @@ class ProfileUpdate(View):
             return redirect(new_profile.get_absolute_url())
         else:
             return render(request,self.template_name,{'form':bound_form})
-        
+
 
 
 
