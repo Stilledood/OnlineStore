@@ -1,4 +1,4 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,get_object_or_404
 from django.views.generic import View
 from django.conf import settings
 from django.contrib.auth import get_user,logout
@@ -91,7 +91,37 @@ class AccountActivation(View):
             messages.warning(request,'Confirmation link is no longer valid')
             return redirect('dj-auth:signup')
 
+class ProfileDetails(View):
+    '''Class to create a view to display user profile'''
 
+    model=Profile
+    template_name='user/profile.html'
+
+    def get(self,request,username):
+        profile=get_object_or_404(self.model,username=username)
+        return render(request,self.template_name,{'profile':profile})
+
+
+class ProfileUpdate(View):
+    '''Class to create a view to update profile informations'''
+
+    model=Profile
+    template_name='user/profile_change.html'
+    form_class=ProfileForm
+
+    def get(self,request,username):
+        profile=get_object_or_404(self.model,username=username)
+        return  render(request,self.template_name,{'form':self.form_class(instance=profile)})
+
+    def post(self,request,username):
+        profile=get_object_or_404(self.model,username=username)
+        bound_form=self.form_class(request.POST,instance=profile)
+        if bound_form.is_valid():
+            new_profile=bound_form.save()
+            return redirect(new_profile.get_absolute_url())
+        else:
+            return render(request,self.template_name,{'form':bound_form})
+        
 
 
 
