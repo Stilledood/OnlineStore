@@ -32,6 +32,8 @@ def get_cart_items(request):
 
     return CartItem.objects.filter(cart_id=_cart_id(request))
 
+
+
 def add_to_cart(request):
     '''Fynction that takes a POST request and adds a product to the cart'''
 
@@ -53,6 +55,47 @@ def add_to_cart(request):
             ci.quantity=quantity
             ci.cart_id= _cart_id(request)
             ci.save()
+
+
+def get_single_item(request,item_id):
+    return get_object_or_404(CartItem,id=item_id,cart_id=_cart_id(request))
+
+
+def update_cart(request):
+    '''Function that take a POST request and updates quantity for a single item in cart'''
+
+    postdata=request.POST.copy()
+    quantity=postdata['quantity']
+    item_id=postdata['item_id']
+    cart_item=get_single_item(request,item_id)
+    if cart_item:
+        if int(quantity) >0:
+            cart_item.quantity=int(quantity)
+            cart_item.save()
+        else:
+            remove_from_cart(request)
+
+def remove_from_cart(request):
+    '''Function to remove a single item from cart'''
+    postdata=request.POST.copy()
+    item_id=postdata['item_id']
+    cart_item=get_single_item(request,item_id)
+    if cart_item:
+        cart_item.delete()
+
+def cart_subtotal(request):
+    '''Subtotal of curent cart'''
+    cart_total=decimal.Decimal('0.00')
+    cart_products=get_cart_items(request)
+    for cart_item in cart_products:
+        cart_total+=cart_item.product.price*cart_item.quantity
+    return cart_total
+
+def empty_cart(request):
+    '''Empties the shopping cart'''
+    user_cart=get_cart_items(request)
+    user_cart.delete()
+
 
 
 
