@@ -1,0 +1,13 @@
+{% extends parent_template|default:'shoppingcart/cart_base.html' %}
+{% block content %}
+<h3>{{item.product.name}}</h3>
+<img src="{{item.product.image.url}}">
+<h3>{{item.product.price}}</h3>
+<h3>{{item.quantity}}</h3>
+<h3>{{item.total}}</h3>
+<form action="." method="post">
+    {% csrf_token %}
+    {{form.as_p}}
+    <button type="submit">Update</button>
+</form>
+{% endblock content %}

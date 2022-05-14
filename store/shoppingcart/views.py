@@ -45,7 +45,19 @@ class EditCart(View):
             return render(request,self.template_name,{'form':bound_form,'item':orderitem})
 
 
+class DeleteItem(View):
 
+    model=OrderItem
+    template_name='shoppingcart/delete_item.html'
+
+    def get(self,request,pk):
+        item=get_object_or_404(self.model,pk=pk)
+        return render(request,self.template_name,{'item':item})
+
+    def post(self,request,pk):
+        item=get_object_or_404(self.model,pk=pk)
+        item.delete()
+        return redirect('cart_details')
 
 
 
