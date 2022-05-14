@@ -66,10 +66,10 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'cart.context_processor.cart_total_amount'
+
 
 ]
-CART_SESSION_ID='cart'
+
 
 ROOT_URLCONF = 'store.urls'
 

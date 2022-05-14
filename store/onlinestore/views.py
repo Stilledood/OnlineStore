@@ -6,6 +6,10 @@ from .forms import CategoryForm,TagForm,ProductForm,ReviewForm
 from user.decorators import custom_login_required,custom_permission_required
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
+from shoppingcart.forms import AddToCartForm
+from shoppingcart.models import Order,OrderItem
+
+
 
 
 class CategoryList(View):
@@ -232,13 +236,16 @@ class ProductDetails(View):
 
     model=Product
     template_name='onlinestore/product_details.html'
-    form_class=ReviewForm
+    form_class=AddToCartForm
+
 
     def get(self,request,pk):
         product=get_object_or_404(self.model,pk=pk)
         context={'product':product,
                  'form':self.form_class()}
+
         return render(request,self.template_name,context=context)
+
 
 
     @method_decorator(login_required)
@@ -246,17 +253,28 @@ class ProductDetails(View):
         product=get_object_or_404(self.model,pk=pk)
         bound_form=self.form_class(request.POST)
         if bound_form.is_valid():
-            new_comm=bound_form.save(commit=False)
-            new_comm.product=product
-            new_comm.user=self.request.user
-            new_comm.save()
+            user = request.user
+            order, created = Order.objects.get_or_create(user=user, complete=False)
+            print(order.orderitem_set.all())
+
+
+            if len(OrderItem.objects.filter(order=order, product=product)) == 0:
+                OrderItem.objects.create(order=order, product=product)
+
+
+            else:
+                existing_item = OrderItem.objects.get(order=order, product=product)
+                existing_item.quantity = existing_item.quantity + 1
+                existing_item.save()
             return redirect(product.get_absolute_url())
+
         else:
-            return render(request,self.template_name,{'form':bound_form,'product':product})
+            context={'form':bound_form}
+            return render(request,self.template_name,context=context)
 
 
 
-@custom_permission_required('onlinestore.add_product')
+@custom_permission_required('onlinestore.add_review')
 class ProductAdd(View):
     '''Class to construct a view to add Product objects'''
 

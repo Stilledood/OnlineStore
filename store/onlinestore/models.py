@@ -102,6 +102,7 @@ class Review(models.Model):
     body=models.TextField()
     author=models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE)
     date_added=models.DateField(auto_now_add=True)
+    product=models.ForeignKey(Product,on_delete=models.CASCADE,default=None)
 
     class Meta:
         ordering=['-date_added']

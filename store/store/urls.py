@@ -27,6 +27,7 @@ from django.contrib.sitemaps.views import index,sitemap as sitemap_view
 from .views import GeneralView
 
 
+
 sitenews=[
     re_path(r'^atom/$',AtomPostFeed(),name='blog_atom_feed'),
     re_path(r'^rss/$',RssPostFeed(),name='blog_rss_feed'),
@@ -40,8 +41,10 @@ urlpatterns = [
     re_path(r'^category/',include(category)),
     re_path(r'^user/',include(user_urls,namespace='dj-auth')),
     re_path(r'^blog/',include(blog_urls)),
+
     re_path(r'^sitenews/',include(sitenews)),
     re_path(r'^sitemap.xml$',sitemap_view,{'sitemaps':sitemaps},name='django.contrib.sitemaps.views.sitemap'),
+
 
 
 

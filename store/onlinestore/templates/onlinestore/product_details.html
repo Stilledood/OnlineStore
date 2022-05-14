@@ -3,12 +3,15 @@
 <h3>{{product.title}}</h3>
 <h2>{{product.description}}</h2>
 <h2>{{product.price}}</h2>
-{% if perms.onlinestore.add_product  %}
-    <form action="{% url 'product_details' pk=product.pk %}"
-          method="post">
-        {% csrf_token %}
-        {{form.as_p}}
-        <button type="submit">Post review</button>
-    </form>
-{% endif %}
+<h2>{{product.pk}}</h2>
+
+<form action="." method="post">
+    {% csrf_token %}
+    {{form.as_p}}
+    <button type="submit">Add to Cart</button>
+</form>
+
+{% for review in product.reviews_set.all %}
+    <h5>{{review.body}}</h5>
+{% endfor %}
 {% endblock content %}
