@@ -61,6 +61,22 @@ class DeleteItem(View):
 
 
 
+class CartDelete(View):
+    '''Class to construct a view to delete your cart items'''
+
+    model=Order
+    template_name='shoppingcart/empty_cart.html'
+
+    def get(self,request):
+        user=request.user
+        order=get_object_or_404(self.model,user=user,complete=False)
+        return render(request,self.template_name,{'order':order})
+
+    def post(self,request):
+        user = request.user
+        order = get_object_or_404(self.model, user=user, complete=False)
+        order.delete()
+        return redirect('cart_details')
 
 
 
