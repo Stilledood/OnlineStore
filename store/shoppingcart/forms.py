@@ -7,3 +7,10 @@ class AddToCartForm(forms.ModelForm):
         model=OrderItem
         fields=[]
 
+class UpdateCartItem(forms.ModelForm):
+
+    class Meta:
+        model=OrderItem
+        fields=['quantity']
+
+

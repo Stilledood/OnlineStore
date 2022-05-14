@@ -1,6 +1,7 @@
 from django.db import models
 from onlinestore.models import Product
 from django.conf import settings
+from django.shortcuts import reverse
 
 class Order(models.Model):
     '''Class to create a model for each order'''
@@ -31,6 +32,13 @@ class OrderItem(models.Model):
 
     def total(self):
         return self.product.price*self.quantity
+
+    def get_update_url(self):
+        return reverse('item_update',kwargs={'pk':self.pk})
+    def get_delete_url(self):
+        return reverse('item_delete',kwargs={'pk':self.pk})
+
+
 
 
 class ShippingAdress(models.Model):
