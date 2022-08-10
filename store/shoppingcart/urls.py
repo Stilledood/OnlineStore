@@ -1,4 +1,4 @@
-from .views import Cart,EditCart,DeleteItem,CartDelete
+from .views import Cart,EditCart,DeleteItem,CartDelete,ShippingView
 from django.urls import re_path
 
 urlpatterns=[
@@ -6,5 +6,6 @@ urlpatterns=[
     re_path(r'^(?P<pk>\d+)/edit/$',EditCart.as_view(),name='item_update'),
     re_path(r'^(?P<pk>\d+)/delete/$',DeleteItem.as_view(),name='item_delete'),
     re_path(r'^delete/$',CartDelete.as_view(),name='empty_cart'),
+    re_path(r'^shipping/$',ShippingView.as_view(),name='shipping'),
 
 ]

@@ -1,7 +1,112 @@
 {% extends parent_template|default:'onlinestore/onlinestore_base.html' %}
 {% block content %}
-{% for product in product_list %}
-    <h3>{{product.name}}</h3>
-    <a href="{{product.get_absolute_url}}">Details</a>
-{% endfor %}
+<div id="header-carousel" class="carousel slide carousel-fade" data-ride="carousel">
+
+
+				<!--/.carousel-inner -->
+				<div class="carousel-inner" role="listbox">
+					<!-- .item -->
+
+					<div class="item active">
+						<div class="single-slide-item slide1">
+							<div class="container">
+								<div class="welcome-hero-content">
+									<div class="row">
+										<div class="col-sm-7">
+
+											<div class="single-welcome-hero">
+
+												<div class="welcome-hero-txt">
+													<h4>great design collection</h4>
+													<h2>{{ banner_product.name}}</h2>
+													<p>
+														{{banner_product.description}}
+													</p>
+													<div class="packages-price">
+
+														<p>
+															{{banner_product.new_price}} Ron
+														</p>
+
+
+
+													</div>
+													<button class="btn-cart welcome-add-cart" onclick="window.location.href='#'">
+														<span class="lnr lnr-plus-circle"></span>
+														add <span>to</span> cart
+													</button>
+													<button class="btn-cart welcome-add-cart welcome-more-info" onclick="window.location.href='#'">
+														more info
+													</button>
+												</div><!--/.welcome-hero-txt-->
+											</div><!--/.single-welcome-hero-->
+										</div><!--/.col-->
+										<div class="col-sm-5">
+											<div class="single-welcome-hero">
+												<div class="welcome-hero-img">
+													<img src="{{banner_product.image.url}}" alt="slider image">
+												</div><!--/.welcome-hero-txt-->
+											</div><!--/.single-welcome-hero-->
+										</div><!--/.col-->
+									</div><!--/.row-->
+								</div><!--/.welcome-hero-content-->
+							</div><!-- /.container-->
+						</div><!-- /.single-slide-item-->
+
+					</div><!-- /.item .active-->
+
+
+
+
+
+				</div><!-- /.carousel-inner-->
+
+			</div><!--/#header-carousel-->
+
+
+<section id="new-arrivals" class="new-arrivals">
+			<div class="container">
+				<div class="section-header">
+					<h2>All Products</h2>
+				</div><!--/.section-header-->
+				<div class="new-arrivals-content">
+					<div class="row">
+                        {% for product in product_list %}
+						<div class="col-md-3 col-sm-4">
+							<div class="single-new-arrival">
+								<div class="single-new-arrival-bg">
+									<img src="{{product.image.url}}" alt="new-arrivals images">
+									<div class="single-new-arrival-bg-overlay"></div>
+									<br>
+									</br>
+
+									<div class="new-arrival-cart">
+										<p>
+											<form action="." method="post">
+												{% csrf_token %}
+
+												<span class="lnr lnr-cart"></span>
+												<button type="submit" >Add to cart</button>
+
+											</form>
+
+										</p>
+
+									</div>
+								</div>
+								<h4><a href="{{product.get_absolute_url}}">{{product.name}}</a></h4>
+								<p class="arrival-product-price">${{product.price}}</p>
+                                <p>
+
+                                    <span class="feature-review">{{product.review_set.count}} Reviews</span>
+                                </p>
+							</div>
+						</div>
+                        {% endfor %}
+
+						</div>
+
+			</div><!--/.container-->
+
+		</section><!--/.new-arrivals-->
 {% endblock content %}

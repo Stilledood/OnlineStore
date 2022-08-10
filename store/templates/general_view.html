@@ -2,36 +2,195 @@
 {% extends parent_template|default:'base.html'%}
 {% load static %}
 {% block content %}
+<div id="header-carousel" class="carousel slide carousel-fade" data-ride="carousel">
+				<!--/.carousel-indicator -->
+				 <ol class="carousel-indicators">
+					<li data-target="#header-carousel" data-slide-to="0" class="active"><span class="small-circle"></span></li>
+					<li data-target="#header-carousel" data-slide-to="1"><span class="small-circle"></span></li>
+					<li data-target="#header-carousel" data-slide-to="2"><span class="small-circle"></span></li>
+				</ol><!-- /ol-->
+				<!--/.carousel-indicator -->
+
+				<!--/.carousel-inner -->
+				<div class="carousel-inner" role="listbox">
+					<!-- .item -->
+
+					<div class="item active">
+						<div class="single-slide-item slide1">
+							<div class="container">
+								<div class="welcome-hero-content">
+									<div class="row">
+										<div class="col-sm-7">
+
+											<div class="single-welcome-hero">
+
+												<div class="welcome-hero-txt">
+													<h4>great design collection</h4>
+													<h2>{{ banner_item1.name }}</h2>
+													<p>
+														{{banner_item1.description}}
+													</p>
+													<div class="packages-price">
+
+														<p>
+															{{banner_item1.new_price}} Ron
+														</p>
 
 
-<section id="populer-products" class="populer-products">
+
+													</div>
+													<button class="btn-cart welcome-add-cart" onclick="window.location.href='#'">
+														<span class="lnr lnr-plus-circle"></span>
+														add <span>to</span> cart
+													</button>
+													<button class="btn-cart welcome-add-cart welcome-more-info" onclick="window.location.href='#'">
+														more info
+													</button>
+												</div><!--/.welcome-hero-txt-->
+											</div><!--/.single-welcome-hero-->
+										</div><!--/.col-->
+										<div class="col-sm-5">
+											<div class="single-welcome-hero">
+												<div class="welcome-hero-img">
+													<img src="{{banner_item1.image.url}}" alt="slider image">
+												</div><!--/.welcome-hero-txt-->
+											</div><!--/.single-welcome-hero-->
+										</div><!--/.col-->
+									</div><!--/.row-->
+								</div><!--/.welcome-hero-content-->
+							</div><!-- /.container-->
+						</div><!-- /.single-slide-item-->
+
+					</div><!-- /.item .active-->
+
+
+					<div class="item">
+						<div class="single-slide-item slide2">
+							<div class="container">
+								<div class="welcome-hero-content">
+									<div class="row">
+										<div class="col-sm-7">
+											<div class="single-welcome-hero">
+												<div class="welcome-hero-txt">
+													<h4>great design collection</h4>
+													<h2>{{banner_item2.name}}</h2>
+													<p>
+														{{banner_item2.description}}
+													</p>
+													<div class="packages-price">
+														<p>
+															{{banner_item2.price}} Ron
+
+														</p>
+													</div>
+													<button class="btn-cart welcome-add-cart" onclick="window.location.href='#'">
+														<span class="lnr lnr-plus-circle"></span>
+														add <span>to</span> cart
+													</button>
+													<button class="btn-cart welcome-add-cart welcome-more-info" onclick="window.location.href='#'">
+														more info
+													</button>
+												</div><!--/.welcome-hero-txt-->
+											</div><!--/.single-welcome-hero-->
+										</div><!--/.col-->
+										<div class="col-sm-5">
+											<div class="single-welcome-hero">
+												<div class="welcome-hero-img">
+													<img src="{{banner_item2.image.url}}"  alt="slider image">
+												</div><!--/.welcome-hero-txt-->
+											</div><!--/.single-welcome-hero-->
+										</div><!--/.col-->
+									</div><!--/.row-->
+								</div><!--/.welcome-hero-content-->
+							</div><!-- /.container-->
+						</div><!-- /.single-slide-item-->
+
+					</div><!-- /.item .active-->
+
+					<div class="item">
+						<div class="single-slide-item slide3">
+							<div class="container">
+								<div class="welcome-hero-content">
+									<div class="row">
+										<div class="col-sm-7">
+											<div class="single-welcome-hero">
+												<div class="welcome-hero-txt">
+													<h4>great design collection</h4>
+													<h2>{{banner_item3.name}}</h2>
+													<p>
+														{{banner_item3.description}}
+													</p>
+													<div class="packages-price">
+														<p>
+															{{banner_item3.price}} Ron
+
+														</p>
+													</div>
+													<button class="btn-cart welcome-add-cart" onclick="window.location.href='#'">
+														<span class="lnr lnr-plus-circle"></span>
+														add <span>to</span> cart
+													</button>
+													<button class="btn-cart welcome-add-cart welcome-more-info" onclick="window.location.href='#'">
+														more info
+													</button>
+												</div><!--/.welcome-hero-txt-->
+											</div><!--/.single-welcome-hero-->
+										</div><!--/.col-->
+										<div class="col-sm-5">
+											<div class="single-welcome-hero">
+												<div class="welcome-hero-img">
+													<img src="{{banner_item3.image.url}}" alt="slider image">
+												</div><!--/.welcome-hero-txt-->
+											</div><!--/.single-welcome-hero-->
+										</div><!--/.col-->
+									</div><!--/.row-->
+								</div><!--/.welcome-hero-content-->
+							</div><!-- /.container-->
+						</div><!-- /.single-slide-item-->
+
+					</div><!-- /.item .active-->
+				</div><!-- /.carousel-inner-->
+
+			</div><!--/#header-carousel-->
+
+<!--populer-products start -->
+		<section id="populer-products" class="populer-products">
 			<div class="container">
 				<div class="populer-products-content">
-
 					<div class="row">
 						{% for category in category_list %}
+
 						<div class="col-md-3">
+
 							<div class="single-populer-products">
-								<div class="single-populer-product-img mt40">
-									<img src="{{category.image.url}}" alt="populer-products images" style="max-height: 100px">
+								<div class="single-populer-product-img mt40" >
+									<img src="{{category.image.url}}" alt="populer-products images" align="justify">
 								</div>
 								<h2><a href="#">{{category.name}}</a></h2>
 								<div class="single-populer-products-para">
-									<p>Nemo enim ipsam voluptatem quia volu ptas sit asperna aut odit aut fugit.</p>
+
 								</div>
 							</div>
+
 						</div>
 						{% endfor %}
+						<div class="section-header">
+							<button >
+								<li class=" scroll active"><a href="#home">View All Categories</a></li>
+							</button>
+
+						</div><!--/.section-header-->
+
+
+
+
 					</div>
-
 				</div>
-
 			</div><!--/.container-->
 
 		</section><!--/.populer-products-->
 		<!--populer-products end-->
-
-		<!--new-arrivals start -->
+<!--new-arrivals start -->
 		<section id="new-arrivals" class="new-arrivals">
 			<div class="container">
 				<div class="section-header">
@@ -40,190 +199,27 @@
 				<div class="new-arrivals-content">
 					<div class="row">
 						{% for product in new_arrivals %}
-						<div class="col-md-3 col-sm-4">
+						<div class="col-md-4 col-sm-8">
 							<div class="single-new-arrival">
-								<div class="single-new-arrival-bg">
-									<img src="{{product.image.url}}" alt="new-arrivals images">
+								<div class="single-new-arrival-bg"  >
+									<img src="{{product.image.url}}" alt="new-arrivals images" >
 									<div class="single-new-arrival-bg-overlay"></div>
-									<div class="sale bg-1">
-										<p>sale</p>
-									</div>
-									<div class="new-arrival-cart">
-										<p>
-											<span class="lnr lnr-cart"></span>
-											<a href="#">add <span>to </span> cart</a>
-										</p>
-										<p class="arrival-review pull-right">
-											<span class="lnr lnr-heart"></span>
-											<span class="lnr lnr-frame-expand"></span>
-										</p>
-									</div>
+
+
 								</div>
-								<h4><a href="{{product.get_absolute_url}}">{{product.name}}</a></h4>
-								<p class="arrival-product-price">{{product.price}} $</p>
+								<h4><a href="#">{{product.name}}</a></h4>
+								<p class="arrival-product-price">{{product.price}} Ron</p>
 							</div>
 						</div>
 						{% endfor %}
-						<div class="col-md-3 col-sm-4">
-							<div class="single-new-arrival">
-								<div class="single-new-arrival-bg">
-									<img src="{% static 'images/collection/arrivals2.png' %}" alt="new-arrivals images">
-									<div class="single-new-arrival-bg-overlay"></div>
-									<div class="sale bg-2">
-										<p>sale</p>
-									</div>
-									<div class="new-arrival-cart">
-										<p>
-											<span class="lnr lnr-cart"></span>
-											<a href="#">add <span>to </span> cart</a>
-										</p>
-										<p class="arrival-review pull-right">
-											<span class="lnr lnr-heart"></span>
-											<span class="lnr lnr-frame-expand"></span>
-										</p>
-									</div>
-								</div>
-								<h4><a href="#">single armchair</a></h4>
-								<p class="arrival-product-price">$80.00</p>
-							</div>
-						</div>
-						<div class="col-md-3 col-sm-4">
-							<div class="single-new-arrival">
-								<div class="single-new-arrival-bg">
-									<img src="{% static 'images/collection/arrivals3.png' %}" alt="new-arrivals images">
-									<div class="single-new-arrival-bg-overlay"></div>
-									<div class="new-arrival-cart">
-										<p>
-											<span class="lnr lnr-cart"></span>
-											<a href="#">add <span>to </span> cart</a>
-										</p>
-										<p class="arrival-review pull-right">
-											<span class="lnr lnr-heart"></span>
-											<span class="lnr lnr-frame-expand"></span>
-										</p>
-									</div>
-								</div>
-								<h4><a href="#">wooden armchair</a></h4>
-								<p class="arrival-product-price">$40.00</p>
-							</div>
-						</div>
-						<div class="col-md-3 col-sm-4">
-							<div class="single-new-arrival">
-								<div class="single-new-arrival-bg">
-									<img src="{% static 'images/collection/arrivals4.png' %}" alt="new-arrivals images">
-									<div class="single-new-arrival-bg-overlay"></div>
-									<div class="sale bg-1">
-										<p>sale</p>
-									</div>
-									<div class="new-arrival-cart">
-										<p>
-											<span class="lnr lnr-cart"></span>
-											<a href="#">add <span>to </span> cart</a>
-										</p>
-										<p class="arrival-review pull-right">
-											<span class="lnr lnr-heart"></span>
-											<span class="lnr lnr-frame-expand"></span>
-										</p>
-									</div>
-								</div>
-								<h4><a href="#">stylish chair</a></h4>
-								<p class="arrival-product-price">$100.00</p>
-							</div>
-						</div>
-						<div class="col-md-3 col-sm-4">
-							<div class="single-new-arrival">
-								<div class="single-new-arrival-bg">
-									<img src="{% static 'images/collection/arrivals5.png' %}" alt="new-arrivals images">
-									<div class="single-new-arrival-bg-overlay"></div>
-									<div class="new-arrival-cart">
-										<p>
-											<span class="lnr lnr-cart"></span>
-											<a href="#">add <span>to </span> cart</a>
-										</p>
-										<p class="arrival-review pull-right">
-											<span class="lnr lnr-heart"></span>
-											<span class="lnr lnr-frame-expand"></span>
-										</p>
-									</div>
-								</div>
-								<h4><a href="#">modern chair</a></h4>
-								<p class="arrival-product-price">$120.00</p>
-							</div>
-						</div>
-						<div class="col-md-3 col-sm-4">
-							<div class="single-new-arrival">
-								<div class="single-new-arrival-bg">
-									<img src="{% static 'images/collection/arrivals6.png' %}" alt="new-arrivals images">
-									<div class="single-new-arrival-bg-overlay"></div>
-									<div class="sale bg-1">
-										<p>sale</p>
-									</div>
-									<div class="new-arrival-cart">
-										<p>
-											<span class="lnr lnr-cart"></span>
-											<a href="#">add <span>to </span> cart</a>
-										</p>
-										<p class="arrival-review pull-right">
-											<span class="lnr lnr-heart"></span>
-											<span class="lnr lnr-frame-expand"></span>
-										</p>
-									</div>
-								</div>
-								<h4><a href="#">mapple wood dinning table</a></h4>
-								<p class="arrival-product-price">$140.00</p>
-							</div>
-						</div>
-						<div class="col-md-3 col-sm-4">
-							<div class="single-new-arrival">
-								<div class="single-new-arrival-bg">
-									<img src="{% static 'images/collection/arrivals7.png' %}" alt="new-arrivals images">
-									<div class="single-new-arrival-bg-overlay"></div>
-									<div class="sale bg-2">
-										<p>sale</p>
-									</div>
-									<div class="new-arrival-cart">
-										<p>
-											<span class="lnr lnr-cart"></span>
-											<a href="#">add <span>to </span> cart</a>
-										</p>
-										<p class="arrival-review pull-right">
-											<span class="lnr lnr-heart"></span>
-											<span class="lnr lnr-frame-expand"></span>
-										</p>
-									</div>
-								</div>
-								<h4><a href="#">arm chair</a></h4>
-								<p class="arrival-product-price">$90.00</p>
-							</div>
-						</div>
-						<div class="col-md-3 col-sm-4">
-							<div class="single-new-arrival">
-								<div class="single-new-arrival-bg">
-									<img src="{% static 'images/collection/arrivals8.png' %}" alt="new-arrivals images">
-									<div class="single-new-arrival-bg-overlay"></div>
-									<div class="new-arrival-cart">
-										<p>
-											<span class="lnr lnr-cart"></span>
-											<a href="#">add <span>to </span> cart</a>
-										</p>
-										<p class="arrival-review pull-right">
-											<span class="lnr lnr-heart"></span>
-											<span class="lnr lnr-frame-expand"></span>
-										</p>
-									</div>
-								</div>
-								<h4><a href="#">wooden bed</a></h4>
-								<p class="arrival-product-price">$140.00</p>
-							</div>
-						</div>
+
 					</div>
 				</div>
 			</div><!--/.container-->
 
 		</section><!--/.new-arrivals-->
 		<!--new-arrivals end -->
-
-		<!--sofa-collection start -->
+	<!--sofa-collection start -->
 		<section id="sofa-collection">
 			<div class="owl-carousel owl-theme" id="collection-carousel">
 				<div class="sofa-collection collectionbg1">
@@ -262,8 +258,7 @@
 
 		</section><!--/.sofa-collection-->
 		<!--sofa-collection end -->
-
-		<!--feature start -->
+<!--feature start -->
 		<section id="feature" class="feature">
 			<div class="container">
 				<div class="section-header">
@@ -274,73 +269,20 @@
 						{% for product in featured_products %}
 						<div class="col-sm-3">
 							<div class="single-feature">
-								<img src="{{product.image.url}}" alt="feature image" style="max-height 300px">
+								<img src="{{product.image.url}}" alt="feature image">
 								<div class="single-feature-txt text-center">
 									<p>
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
+
 										<span class="spacial-feature-icon"><i class="fa fa-star"></i></span>
-										<span class="feature-review">(45 review)</span>
+										<span class="feature-review">{{product.review_set.count}} Reviews</span>
 									</p>
 									<h3><a href="#">designed sofa</a></h3>
 									<h5>$160.00</h5>
 								</div>
 							</div>
-							{% endfor %}
 						</div>
-						<div class="col-sm-3">
-							<div class="single-feature">
-								<img src="{% static 'images/features/f2.jpg' %}" alt="feature image">
-								<div class="single-feature-txt text-center">
-									<p>
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-										<span class="spacial-feature-icon"><i class="fa fa-star"></i></span>
-										<span class="feature-review">(45 review)</span>
-									</p>
-									<h3><a href="#">dinning table </a></h3>
-									<h5>$200.00</h5>
-								</div>
-							</div>
-						</div>
-						<div class="col-sm-3">
-							<div class="single-feature">
-								<img src="{% static 'images/features/f3.jpg' %}" alt="feature image">
-								<div class="single-feature-txt text-center">
-									<p>
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-										<span class="spacial-feature-icon"><i class="fa fa-star"></i></span>
-										<span class="feature-review">(45 review)</span>
-									</p>
-									<h3><a href="#">chair and table</a></h3>
-									<h5>$100.00</h5>
-								</div>
-							</div>
-						</div>
-						<div class="col-sm-3">
-							<div class="single-feature">
-								<img src="{% static 'images/features/f4.jpg' %}" alt="feature image">
-								<div class="single-feature-txt text-center">
-									<p>
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-										<span class="spacial-feature-icon"><i class="fa fa-star"></i></span>
-										<span class="feature-review">(45 review)</span>
-									</p>
-									<h3><a href="#">modern arm chair</a></h3>
-									<h5>$299.00</h5>
-								</div>
-							</div>
-						</div>
+						{% endfor %}
+
 					</div>
 				</div>
 			</div><!--/.container-->
@@ -348,181 +290,9 @@
 		</section><!--/.feature-->
 		<!--feature end -->
 
-		<!--blog start -->
-		<section id="blog" class="blog">
-			<div class="container">
-				<div class="section-header">
-					<h2>latest blog</h2>
-				</div><!--/.section-header-->
-				<div class="blog-content">
-					<div class="row">
-						<div class="col-sm-4">
-							<div class="single-blog">
-								<div class="single-blog-img">
-									<img src="{% static 'images/blog/b1.jpg' %}" alt="blog image">
-									<div class="single-blog-img-overlay"></div>
-								</div>
-								<div class="single-blog-txt">
-									<h2><a href="#">Why Brands are Looking at Local Language</a></h2>
-									<h3>By <a href="#">Robert Norby</a> / 18th March 2018</h3>
-									<p>
-										Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt....
-									</p>
-								</div>
-							</div>
 
-						</div>
-						<div class="col-sm-4">
-							<div class="single-blog">
-								<div class="single-blog-img">
-									<img src="{% static 'images/blog/b2.jpg' %}" alt="blog image">
-									<div class="single-blog-img-overlay"></div>
-								</div>
-								<div class="single-blog-txt">
-									<h2><a href="#">Why Brands are Looking at Local Language</a></h2>
-									<h3>By <a href="#">Robert Norby</a> / 18th March 2018</h3>
-									<p>
-										Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt....
-									</p>
-								</div>
-							</div>
-						</div>
-						<div class="col-sm-4">
-							<div class="single-blog">
-								<div class="single-blog-img">
-									<img src="{% static 'images/blog/b3.jpg' %}" alt="blog image">
-									<div class="single-blog-img-overlay"></div>
-								</div>
-								<div class="single-blog-txt">
-									<h2><a href="#">Why Brands are Looking at Local Language</a></h2>
-									<h3>By <a href="#">Robert Norby</a> / 18th March 2018</h3>
-									<p>
-										Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt....
-									</p>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div><!--/.container-->
 
-		</section><!--/.blog-->
-		<!--blog end -->
 
-		<!-- clients strat -->
-		<section id="clients"  class="clients">
-			<div class="container">
-				<div class="owl-carousel owl-theme" id="client">
-						<div class="item">
-							<a href="#">
-								<img src="{% static 'images/clients/c1.png' %}" alt="brand-image" />
-							</a>
-						</div><!--/.item-->
-						<div class="item">
-							<a href="#">
-								<img src="{% static 'images/clients/c2.png' %}" alt="brand-image" />
-							</a>
-						</div><!--/.item-->
-						<div class="item">
-							<a href="#">
-								<img src="{% static 'images/clients/c3.png' %}" alt="brand-image" />
-							</a>
-						</div><!--/.item-->
-						<div class="item">
-							<a href="#">
-								<img src="{% static 'images/clients/c4.png' %}" alt="brand-image" />
-							</a>
-						</div><!--/.item-->
-						<div class="item">
-							<a href="#">
-								<img src="{% static 'images/clients/c5.png' %}" alt="brand-image" />
-							</a>
-						</div><!--/.item-->
-					</div><!--/.owl-carousel-->
 
-			</div><!--/.container-->
-
-		</section><!--/.clients-->
-		<!-- clients end -->
-
-		<!--newsletter strat -->
-		<section id="newsletter"  class="newsletter">
-			<div class="container">
-				<div class="hm-footer-details">
-					<div class="row">
-						<div class=" col-md-3 col-sm-6 col-xs-12">
-							<div class="hm-footer-widget">
-								<div class="hm-foot-title">
-									<h4>information</h4>
-								</div><!--/.hm-foot-title-->
-								<div class="hm-foot-menu">
-									<ul>
-										<li><a href="#">about us</a></li><!--/li-->
-										<li><a href="#">contact us</a></li><!--/li-->
-										<li><a href="#">news</a></li><!--/li-->
-										<li><a href="#">store</a></li><!--/li-->
-									</ul><!--/ul-->
-								</div><!--/.hm-foot-menu-->
-							</div><!--/.hm-footer-widget-->
-						</div><!--/.col-->
-						<div class=" col-md-3 col-sm-6 col-xs-12">
-							<div class="hm-footer-widget">
-								<div class="hm-foot-title">
-									<h4>collections</h4>
-								</div><!--/.hm-foot-title-->
-								<div class="hm-foot-menu">
-									<ul>
-										<li><a href="#">wooden chair</a></li><!--/li-->
-										<li><a href="#">royal cloth sofa</a></li><!--/li-->
-										<li><a href="#">accent chair</a></li><!--/li-->
-										<li><a href="#">bed</a></li><!--/li-->
-										<li><a href="#">hanging lamp</a></li><!--/li-->
-									</ul><!--/ul-->
-								</div><!--/.hm-foot-menu-->
-							</div><!--/.hm-footer-widget-->
-						</div><!--/.col-->
-						<div class=" col-md-3 col-sm-6 col-xs-12">
-							<div class="hm-footer-widget">
-								<div class="hm-foot-title">
-									<h4>my accounts</h4>
-								</div><!--/.hm-foot-title-->
-								<div class="hm-foot-menu">
-									<ul>
-										<li><a href="#">my account</a></li><!--/li-->
-										<li><a href="#">wishlist</a></li><!--/li-->
-										<li><a href="#">Community</a></li><!--/li-->
-										<li><a href="#">order history</a></li><!--/li-->
-										<li><a href="#">my cart</a></li><!--/li-->
-									</ul><!--/ul-->
-								</div><!--/.hm-foot-menu-->
-							</div><!--/.hm-footer-widget-->
-						</div><!--/.col-->
-						<div class=" col-md-3 col-sm-6  col-xs-12">
-							<div class="hm-footer-widget">
-								<div class="hm-foot-title">
-									<h4>newsletter</h4>
-								</div><!--/.hm-foot-title-->
-								<div class="hm-foot-para">
-									<p>
-										Subscribe  to get latest news,update and information.
-									</p>
-								</div><!--/.hm-foot-para-->
-								<div class="hm-foot-email">
-									<div class="foot-email-box">
-										<input type="text" class="form-control" placeholder="Enter Email Here....">
-									</div><!--/.foot-email-box-->
-									<div class="foot-email-subscribe">
-										<span><i class="fa fa-location-arrow"></i></span>
-									</div><!--/.foot-email-icon-->
-								</div><!--/.hm-foot-email-->
-							</div><!--/.hm-footer-widget-->
-						</div><!--/.col-->
-					</div><!--/.row-->
-				</div><!--/.hm-footer-details-->
-
-			</div><!--/.container-->
-
-		</section><!--/newsletter-->
-		<!--newsletter end -->
 
 {% endblock content %}

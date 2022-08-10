@@ -1,4 +1,4 @@
-from .models import OrderItem
+from .models import OrderItem,ShippingAdress
 from django import forms
 
 class AddToCartForm(forms.ModelForm):
@@ -14,3 +14,8 @@ class UpdateCartItem(forms.ModelForm):
         fields=['quantity']
 
 
+class ShippingForm(forms.ModelForm):
+
+    class Meta:
+        model=ShippingAdress
+        fields=['adress','state','city','phone']

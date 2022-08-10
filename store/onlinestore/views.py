@@ -8,6 +8,7 @@ from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from shoppingcart.forms import AddToCartForm
 from shoppingcart.models import Order,OrderItem
+import random
 
 
 
@@ -20,6 +21,7 @@ class CategoryList(View):
 
     def get(self,request):
         category_list=self.model.objects.all()
+
         context={'category_list':category_list}
         return render(request,self.template_name,context=context)
 
@@ -32,7 +34,10 @@ class CategoryDetails(View):
 
     def get(self,request,slug):
         category=get_object_or_404(self.model,slug__iexact=slug)
-        context={'category':category}
+        products=category.product_set.all()
+        banner_product=random.choice(products)
+
+        context={'category':category,'product_list':products,'banner_product':banner_product}
         return render(request,self.template_name,context=context)
 
 @custom_permission_required('onlinestore.add_category')
@@ -194,13 +199,14 @@ class ProductList(View):
 
     model = Product
     template_name = 'onlinestore/product_list.html'
-    paginated_by = 10
+    paginated_by = 12
     page_kwargs = 'page'
 
     def get(self, request):
         product_list = self.model.objects.all()
         paginator = Paginator(product_list, self.paginated_by)
         page_number = request.GET.get(self.page_kwargs)
+        banner_product=random.choice(product_list)
 
         try:
             page = paginator.page(page_number)
@@ -224,7 +230,8 @@ class ProductList(View):
             'paginator': paginator,
             'previous_page': previous_page_url,
             'next_page': next_page_url,
-            'product_list': page
+            'product_list': page,
+            'banner_product':banner_product
         }
 
         return render(request, self.template_name, context=context)

@@ -1,13 +1,13 @@
-from .models import Order,OrderItem
+from .models import Order,OrderItem,ShippingAdress
 from django.views.generic import View
 from django.shortcuts import render,get_object_or_404,redirect,reverse
 from onlinestore.models import Product
-from .forms import UpdateCartItem
+from .forms import UpdateCartItem,ShippingForm
 
 
 
 class Cart(View):
-    '''Class to construct a view to display'''
+    '''Class to construct a view to display cart items'''
     template_name='shoppingcart/cart_details.html'
 
 
@@ -80,5 +80,27 @@ class CartDelete(View):
 
 
 
+class ShippingView(View):
+    '''Class to create a view to display shipping form'''
+
+    model=ShippingAdress
+    template_name='shoppingcart/shipping.html'
+    form_class=ShippingForm
+
+    def get(self,request):
+        return render(request,self.template_name,{'form':self.form_class()})
+
+    def post(self,request):
+        user=request.user
+        order,created=Order.objects.get_or_create(user=user,complete=False)
+        bound_form=self.form_class(request.POST)
+        if bound_form.is_valid() :
+            shipping=bound_form.save(commit=False)
+            shipping.user=user
+            shipping.order=order
+            shipping.save()
+            return redirect('checkout')
+        else:
+            return render(request,self.template_name,{'form':bound_form})
 
 
