@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'django.contrib.sitemaps',
     'debug_toolbar',
+    'crispy_forms',
     'onlinestore',
     'blog',
     'contact',

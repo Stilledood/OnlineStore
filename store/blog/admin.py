@@ -31,6 +31,8 @@ class PostAdmin(admin.ModelAdmin):
         return post.tags.count()
     tag_count.short_description='Number of tags'
 
+admin.site.register(Commnent)
+
 
 
 

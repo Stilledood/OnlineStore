@@ -21,7 +21,7 @@ class GeneralView(View):
             'category_list':category_short_list,
             'new_arrivals':new_arrivals,
             'featured_products':featured_products,
-            'leatest_blog':latest_blog,
+            'latest_blogs':latest_blog,
             'banner_item1':banner_item1,
             'banner_item2':banner_item2,
             'banner_item3':banner_item3,

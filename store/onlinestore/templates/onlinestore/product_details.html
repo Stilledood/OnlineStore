@@ -1,17 +1,124 @@
 {% extends parent_template|default:'onlinestore/onlinestore_base.html' %}
 {% block content %}
-<h3>{{product.title}}</h3>
-<h2>{{product.description}}</h2>
-<h2>{{product.price}}</h2>
-<h2>{{product.pk}}</h2>
+<div id="header-carousel" class="carousel slide carousel-fade" data-ride="carousel">
 
-<form action="." method="post">
-    {% csrf_token %}
-    {{form.as_p}}
-    <button type="submit">Add to Cart</button>
-</form>
 
-{% for review in product.reviews_set.all %}
-    <h5>{{review.body}}</h5>
-{% endfor %}
+				<!--/.carousel-inner -->
+				<div class="carousel-inner" role="listbox">
+					<!-- .item -->
+
+					<div class="item active">
+						<div class="single-slide-item slide1">
+							<div class="container">
+								<div class="welcome-hero-content">
+									<div class="row">
+										<div class="col-sm-7">
+
+											<div class="single-welcome-hero">
+
+												<div class="welcome-hero-txt">
+													<h4>great design collection</h4>
+													<h2>{{ product.name}}</h2>
+													<p>
+														{{product.description}}
+													</p>
+													<div class="packages-price">
+
+														<p>
+															{{product.new_price}} Ron
+														</p>
+
+
+
+													</div>
+													<form method="post" action=".">
+														{% csrf_token %}
+														<button class="btn-cart welcome-add-cart" type="submit">
+															<span class="lnr lnr-plus-circle"></span>
+															add <span>to</span> cart
+														</button>
+													</form>
+
+
+												</div><!--/.welcome-hero-txt-->
+											</div><!--/.single-welcome-hero-->
+										</div><!--/.col-->
+										<div class="col-sm-5">
+											<div class="single-welcome-hero">
+												<div class="welcome-hero-img">
+													<img src="{{product.image.url}}" alt="slider image">
+												</div><!--/.welcome-hero-txt-->
+											</div><!--/.single-welcome-hero-->
+										</div><!--/.col-->
+									</div><!--/.row-->
+								</div><!--/.welcome-hero-content-->
+							</div><!-- /.container-->
+						</div><!-- /.single-slide-item-->
+
+					</div><!-- /.item .active-->
+
+
+
+
+
+				</div><!-- /.carousel-inner-->
+
+			</div><!--/#header-carousel-->
+
+<section id="populer-products" class="populer-products">
+			<div class="container">
+				<div class="populer-products-content">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="single-populer-products">
+								<div class="single-inner-populer-products">
+									<div class="row">
+										<div class="col-md-4 col-sm-12">
+											<div class="single-inner-populer-product-img">
+												<img src="{{product.image.url}}" alt="populer-products images">
+											</div>
+										</div>
+										<div class="col-md-8 col-sm-12">
+											<div class="single-inner-populer-product-txt">
+												<h2>
+													<a href="#">
+														Product Characteristics
+													</a>
+												</h2>
+												<p>
+													Name : {{product.name}}
+												</p>
+												<p>
+													Dimensions: {{product.dimensions}} cm
+												</p>
+												<p>
+													Weight: {{product.weight}} kg
+												</p>
+												{% if product.reduced_price %}
+												<div class="populer-products-price">
+													<h4>Price <del>{{product.price}}</del><span> ${{product.new_price}}</span></h4>
+												</div>
+												{% else %}
+												<div class="populer-products-price">
+													<h4>Price<span> ${{product.price}}</span></h4>
+												</div>
+												{% endif %}
+												<form action="." method="post">
+													{% csrf_token %}
+													<button class="btn-cart welcome-add-cart populer-products-btn" type="submit">
+														Add to Cart
+													</button>
+												</form>
+
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+</section>
+
 {% endblock content %}

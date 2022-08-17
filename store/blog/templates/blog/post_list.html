@@ -1,0 +1,90 @@
+{% extends parent_template|default:'blog/base_blog.html' %}
+{% block content %}
+<br>
+</br>
+<br>
+</br>
+<br>
+</br>
+<br>
+</br>
+<section id="populer-products" class="populer-products">
+			<div class="container">
+				<div class="populer-products-content">
+					<div class="row">
+						{% for post in post_list %}
+						<div class="col-md-12">
+							<div class="single-populer-products">
+								<div class="single-inner-populer-products">
+									<div class="row">
+										<div class="col-md-4 col-sm-12">
+											<div class="single-inner-populer-product-img">
+												<img src="{{post.image.url}}" alt="populer-products images">
+											</div>
+										</div>
+										<div class="col-md-8 col-sm-12">
+											<div class="single-inner-populer-product-txt">
+												<h2>
+													<a href="#">
+														{{post.title}}
+													</a>
+												</h2>
+												<p>
+													{{post.text|truncatewords:50}}
+												</p>
+												<p>
+													Date Added: {{post.date_added}}<br>
+													Added By: {{post.author}}
+												</p>
+
+
+												<div class="populer-products-price">
+													<h4>Comments:<span> {{post.commnent_set.count}}</span></h4>
+												</div>
+
+
+													<button class="btn-cart welcome-add-cart populer-products-btn" >
+														<a href="{{post.get_absolute_url}}"> Read More</a>
+													</button>
+
+
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<br>
+						</br>
+						<br>
+						</br>
+						{% endfor %}
+					</div>
+				</div>
+			</div>
+</section>
+<br>
+</br>
+<br>
+</br>
+<br>
+</br>
+<div class="container" align="center">
+				<div class="populer-products-content" allign="center">
+						{% if previous_page_url %}
+							<a  href="{{previous_page_url}}" justiffy="right"> Previous Page</a>
+
+						{% endif %}
+						{% if next_page_url %}
+
+
+								<a  href="{{next_page_url}}" justiffy="center"> Next Page</a>
+
+						{% endif %}
+
+				</div>
+</div>
+
+
+
+{% endblock content %}

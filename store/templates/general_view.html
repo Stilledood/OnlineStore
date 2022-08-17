@@ -290,6 +290,44 @@
 		</section><!--/.feature-->
 		<!--feature end -->
 
+<!--blog start -->
+
+<section id="blog" class="blog">
+	<div class="container">
+		<div class="section-header">
+			<h2>latest blog</h2>
+		</div><!--/.section-header-->
+		<div class="blog-content">
+			<div class="row">
+				{% for blog in latest_blogs %}
+				<div class="col-sm-4">
+					<div class="single-blog">
+						<div class="single-blog-img">
+							<img src="{{blog.image.url}}" alt="blog image">
+							<div class="single-blog-img-overlay"></div>
+						</div>
+						<div class="single-blog-txt">
+							<h4><a href="{{blog.get_absolute_url}}">{{blog.title|truncatewords:7}}</a></h4>
+
+							<h3> Date : {{blog.date_added}}</h3>
+							<h3> Comments : {{blog.commnent_set.count}}</h3>
+							<p>
+								{{blog.text|truncatewords:25}}
+							</p>
+							<a href="{{blog.get_absolute_url}}" class="btn btn-primary text-uppercase py-3 px-5">Read More</a>
+						</div>
+					</div>
+
+				</div>
+				{% endfor %}
+
+			</div>
+		</div>
+	</div><!--/.container-->
+
+</section><!--/.blog-->
+<!--blog end -->
+
 
 
 
