@@ -86,6 +86,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'shoppingcart.context_procesor_file.get_cart_items',
             ],
         },
     },
@@ -201,7 +202,7 @@ verbose=("[%(asctime)] %(levelname)s"
 # Authentification settings
 LOGIN_URL=reverse_lazy('dj-auth:login')
 LOGOUT_URL=reverse_lazy('dj-auth:logout')
-LOGIN_REDIRECT_URL=reverse_lazy('dj-auth:login')
+LOGIN_REDIRECT_URL=reverse_lazy('general_view')
 INTERNAL_IPS=[
     'localhost',
 ]

@@ -1,10 +1,62 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends parent_template|default:'user/base_user.html' %}
 
-</body>
-</html>
+{% block content %}
+<br>
+</br>
+<br>
+</br>
+<br>
+</br>
+<br>
+</br>
+<section id="populer-products" class="populer-products">
+			<div class="container">
+				<div class="populer-products-content">
+					<div class="row">
+
+						<div class="col-md-12">
+							<div class="single-populer-products">
+								<div class="single-inner-populer-products">
+									<div class="row">
+										<div class="col-md-4 col-sm-12">
+											<div class="single-inner-populer-product-img">
+												<img src="{{profile.image.url}}" alt="populer-products images" style="height:300px;">
+											</div>
+										</div>
+										<div class="col-md-8 col-sm-12">
+											<div class="single-inner-populer-product-txt">
+												<h2>
+													<a href="#">
+														Name: {{profile.name}}
+													</a>
+												</h2>
+												<p>
+													Username: {{profile.username}}
+												</p>
+												<p>
+													Number of Orders: {{profile.user.order_set.count}}<br>
+
+												</p>
+
+														<a href="{{profile.get_update_url}}"> Edit</a>
+
+
+
+
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<br>
+						</br>
+						<br>
+						</br>
+
+					</div>
+				</div>
+			</div>
+</section>
+
+{% endblock content %}

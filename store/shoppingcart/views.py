@@ -3,6 +3,8 @@ from django.views.generic import View
 from django.shortcuts import render,get_object_or_404,redirect,reverse
 from onlinestore.models import Product
 from .forms import UpdateCartItem,ShippingForm
+from django.utils.decorators import method_decorator
+from django.contrib.auth.decorators import login_required
 
 
 
@@ -10,15 +12,17 @@ class Cart(View):
     '''Class to construct a view to display cart items'''
     template_name='shoppingcart/cart_details.html'
 
-
+    @method_decorator(login_required())
     def get(self,request):
         user=request.user
         order,created=Order.objects.get_or_create(user=user,complete=False)
         items=order.orderitem_set.all()
         total=order.get_total()
+        number_of_products=sum([product.quantity for product in items])
         context={
             'product_list':items,
             'total':total,
+            'total_number_of_products':number_of_products
 
         }
 

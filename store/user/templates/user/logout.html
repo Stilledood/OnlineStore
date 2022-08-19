@@ -1,6 +1,22 @@
 {% extends parent_template|default:'user/base_user.html' %}
 {% block content %}
-<h3>You are succssfully logout</h3>
-<h4>Log Back In</h4>
-{% include 'user/login_form.html' with login_button='Log back In' %}
+<br>
+</br>
+<br>
+</br>
+<br>
+</br>
+<br>
+</br>
+<div class="container-fluid pt-7" align="center">
+        <div class="container pt-7">
+            <div class="row align-items-center" >
+                    <h3>You are successfully logout</h3>
+            </div>
+            <div class="row align-items-center" >
+                {% include 'user/login_form.html' with login_button='Log Back In'  %}
+            </div>
+        </div>
+</div>
+
 {% endblock content %}

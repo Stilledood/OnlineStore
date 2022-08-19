@@ -1,7 +1,17 @@
 {% extends parent_template|default:'shoppingcart/cart_base.html' %}
+<br>
+</br>
 {% block content %}
+<br>
+</br>
+<br>
+</br>
+<br>
+</br>
+<br>
+</br>
 <h3> Are you sure you want to delete all products from your cart?</h3>
-<form action="." method="post">
+<form action="{% url 'empty_cart' %} " method="post">
     {% csrf_token %}
     <button type="submit">Yes</button>
 </form>

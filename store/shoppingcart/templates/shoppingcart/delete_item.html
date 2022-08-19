@@ -1,7 +1,15 @@
 {% extends parent_template|default:'shoppingcart/cart_base.html' %}
 {% block content %}
+<br>
+</br>
+<br>
+</br>
+<br>
+</br>
+<br>
+</br>
 <h3> Are you sure you want to remove this item</h3>
-<form action="." method="post">
+<form action="{% url 'item_delete' item.pk%}" method="post">
     {% csrf_token %}
     <button type="submit">Yes</button>
 </form>

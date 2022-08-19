@@ -33,7 +33,7 @@ urlpatterns=[
     re_path(r'^signup/$',SignUp.as_view(),name='signup'),
     path('activate/<uidb64>/<token>/',AccountActivation.as_view(),name='account_activation'),
     re_path(r'^(?P<username>[\w\-]+)/$',ProfileDetails.as_view(),name='profile_details'),
-    re_path(r'^(?P<username>[\w\-]+)/update/$',ProfileUpdate.as_view(),name='profile_update'),
+    re_path(r'^(?P<username>[\w\-]+)/update/$',ProfileUpdate.as_view(),name='profile_change'),
 
 
 ]

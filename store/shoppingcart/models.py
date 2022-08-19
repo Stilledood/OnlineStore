@@ -10,6 +10,7 @@ class Order(models.Model):
     complete=models.BooleanField(default=False)
 
 
+
     def __str__(self):
         return str(self.id)
 
@@ -17,6 +18,11 @@ class Order(models.Model):
         products=self.orderitem_set.all()
         total_amount=sum([item.total() for item in products])
         return float(total_amount)
+
+    def order_summary(self):
+        products=self.orderitem_set.all()
+        total_quantity=sum([item.quantity for item in products])
+        return total_quantity
 
 
 class OrderItem(models.Model):
