@@ -20,7 +20,12 @@ class SignUpForm(UserCreationForm):
 class ProfileForm(forms.ModelForm):
     '''Class to construct a form for Profile model'''
 
+    image = forms.ImageField(widget=forms.FileInput(attrs={'class':'form-control','type':'file','id':'image'}))
+    name=forms.CharField(widget=forms.TextInput(attrs={'class':'form-control','type':'text','id':'name'}))
+    username=forms.CharField(widget=forms.TextInput(attrs={'class':'form-control','type':'text','id':'username'}))
+
+
     class Meta:
         model=Profile
-        fields='__all__'
+        fields=['image','name','username']
 

@@ -1,8 +1,46 @@
 {% extends parent_template|default:'shoppingcart/cart_base.html' %}
+{% load static %}
 {% block content %}
-<form action="." method="post">
-    {% csrf_token %}
-    {{form.as_p}}
-    <button type="submit">Checkout</button>
-</form>
+<br>
+</br>
+<br>
+</br>
+<br>
+</br>
+<br>
+</br>
+<br>
+</br>
+
+
+
+<div class="container" align="center">
+				<div class="populer-products-content" align="center">
+					<div class="row">
+
+						<div class="col-md-16" align="center">
+                            <div class="card">
+                                        <div class="card-body">
+                                          <h5 class="card-title">Checkout</h5>
+
+                                          <!-- Multi Columns Form -->
+                                          <form  action=" {% url 'shipping'%}" method="post">
+                                              {% csrf_token %}
+                                              {{form.as_p}}
+
+
+
+                                              <button type="submit" class="btn btn-primary">Submit</button>
+
+
+                                          </form><!-- End Multi Columns Form -->
+                                        </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+</div>
+
+
+
 {% endblock content %}

@@ -114,9 +114,14 @@ class ProfileUpdate(View):
         return  render(request,self.template_name,{'form':self.form_class(instance=profile)})
 
     def post(self,request,username):
+
         profile=get_object_or_404(self.model,username=username)
-        bound_form=self.form_class(request.POST,instance=profile)
+        bound_form=self.form_class(request.POST,request.FILES,instance=profile)
+
         if bound_form.is_valid():
+            print(True)
+
+
             new_profile=bound_form.save()
             return redirect(new_profile.get_absolute_url())
         else:

@@ -146,6 +146,7 @@
 										<li class="nav_item"><a href="{% url 'dj-auth:logout' %}">Log Out</a></li>
 									{% else %}
 										<li class="nav_link active"><a href="{% url 'dj-auth:login' %}?next={{request.path}}">Log In</a></li>
+										<li class="nav_item"><a href="{% url 'dj-auth:signup'  %}">Register</a></li>
 									{% endif %}
 
 				                </ul><!--/.nav -->
@@ -194,18 +195,16 @@
 													<div class="packages-price">
 
 														<p>
-															{{banner_item1.new_price}} Ron
+															{{banner_item1.new_price}} $
 														</p>
 
 
 
 													</div>
-													<button class="btn-cart welcome-add-cart" onclick="window.location.href='#'">
+
+													<button class="btn-cart welcome-add-cart" onclick="window.location.href='{{banner_item1.get_absolute_url}}'">
 														<span class="lnr lnr-plus-circle"></span>
-														add <span>to</span> cart
-													</button>
-													<button class="btn-cart welcome-add-cart welcome-more-info" onclick="window.location.href='#'">
-														more info
+														More <span>Info</span>
 													</button>
 												</div><!--/.welcome-hero-txt-->
 											</div><!--/.single-welcome-hero-->
@@ -244,12 +243,10 @@
 
 														</p>
 													</div>
-													<button class="btn-cart welcome-add-cart" onclick="window.location.href='#'">
+
+													<button class="btn-cart welcome-add-cart" onclick="window.location.href='{{banner_item2.get_absolute_url}}'">
 														<span class="lnr lnr-plus-circle"></span>
-														add <span>to</span> cart
-													</button>
-													<button class="btn-cart welcome-add-cart welcome-more-info" onclick="window.location.href='#'">
-														more info
+														More <span>Info</span>
 													</button>
 												</div><!--/.welcome-hero-txt-->
 											</div><!--/.single-welcome-hero-->
@@ -287,12 +284,10 @@
 
 														</p>
 													</div>
-													<button class="btn-cart welcome-add-cart" onclick="window.location.href='#'">
+
+													<button class="btn-cart welcome-add-cart" onclick="window.location.href='{{banner_item3.get_absolute_url}}'">
 														<span class="lnr lnr-plus-circle"></span>
-														add <span>to</span> cart
-													</button>
-													<button class="btn-cart welcome-add-cart welcome-more-info" onclick="window.location.href='#'">
-														more info
+														More <span>Info</span>
 													</button>
 												</div><!--/.welcome-hero-txt-->
 											</div><!--/.single-welcome-hero-->
@@ -424,32 +419,47 @@
 			<div class="container">
 				<div class="section-header">
 					<h2>featured products</h2>
-				</div><!--/.section-header-->
-				<div class="feature-content">
-					<div class="row">
-						{% for product in featured_products %}
-						<div class="col-sm-3">
-							<div class="single-feature">
-								<img src="{{product.image.url}}" alt="feature image">
-								<div class="single-feature-txt text-center">
-									<p>
 
-										<span class="spacial-feature-icon"><i class="fa fa-star"></i></span>
-										<span class="feature-review">{{product.review_set.count}} Reviews</span>
-									</p>
-									<h3><a href="#">designed sofa</a></h3>
-									<h5>$ 160.00</h5>
-								</div>
-							</div>
-						</div>
-						{% endfor %}
-
-					</div>
-				</div>
 			</div><!--/.container-->
 
 		</section><!--/.feature-->
 		<!--feature end -->
+		<br>
+		</br>
+
+
+    <div class="container">
+        <div class="owl-carousel owl-theme" id="client">
+            {% for product in featured_products %}
+                <div class="item">
+                    <a href="#" align="center">
+                        <img src="{{product.image.url}}" alt="brand-image" />
+						<p align="center">
+                        	<a href="{{product.get_absolute_url}}">{{product.name}}</a>
+							<p align="center">{{product.price}} $</p>
+						</p>
+                    </a>
+                </div><!--/.item-->
+            {% endfor %}
+            </div><!--/.owl-carousel-->
+
+    </div><!--/.container-->
+
+<section id="clients"  class="clients">
+		 <div class="container">
+        <div class="owl-carousel owl-theme" id="client">
+            {% for product in featured_products %}
+                <div class="item">
+                    <a href="#">
+                        <img src="{{product.image.url}}" alt="brand-image" />
+                        <a href="{{product.get_absolute_url}}" >{{product.name}}</a>
+                    </a>
+                </div><!--/.item-->
+            {% endfor %}
+            </div><!--/.owl-carousel-->
+
+    </div><!--/.container-->
+</section>
 
 <!--blog start -->
 

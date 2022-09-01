@@ -1,0 +1,46 @@
+<div class="container" align="center">
+				<div class="populer-products-content" align="center">
+					<div class="row">
+
+						<div class="col-md-16" align="center">
+                            <div class="card">
+                                        <div class="card-body">
+                                          <h5 class="card-title">Checkout</h5>
+
+                                          <!-- Multi Columns Form -->
+                                          <form class="row g-5" action=" {% url 'shipping'%}" method="post">
+                                              {% csrf_token %}
+                                              <div class="col-12">
+                                              <label for="id_adress" class="form-label">{{form.adress.label}}</label>
+                                              <input type="text" class="form-control" id="id_adress" placeholder="1234 Main St">
+                                            </div>
+
+                                            <div class="col-md-6">
+                                              <label for="id_city" class="form-label">{{form.city.label}}</label>
+                                              <input type="text" class="form-control" id="id_city">
+                                            </div>
+                                            <div class="col-md-6">
+                                              <label for="id_state" class="form-label">State</label>
+                                              <input type="text" class="form-control" id="id_state">
+                                            </div>
+
+
+                                            <div class="col-md-6">
+                                              <label for="id_phone" class="form-label">Phone</label>
+                                              <input type="text" class="form-control" id="id_phone">
+                                            </div>
+
+                                            <div class="col-12">
+
+                                            </div>
+                                            <div class="text-center">
+                                              <button type="submit" class="btn btn-primary">Submit</button>
+
+                                            </div>
+                                          </form><!-- End Multi Columns Form -->
+                                        </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+</div>

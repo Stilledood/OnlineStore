@@ -98,12 +98,14 @@ class ShippingView(View):
         user=request.user
         order,created=Order.objects.get_or_create(user=user,complete=False)
         bound_form=self.form_class(request.POST)
+
         if bound_form.is_valid() :
+
             shipping=bound_form.save(commit=False)
             shipping.user=user
             shipping.order=order
             shipping.save()
-            return redirect('checkout')
+            return redirect('post_list')
         else:
             return render(request,self.template_name,{'form':bound_form})
 

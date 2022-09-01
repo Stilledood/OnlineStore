@@ -69,21 +69,23 @@
 </br>
 <br>
 </br>
-<div class="container" align="center">
-				<div class="populer-products-content" allign="center">
-						{% if previous_page_url %}
-							<a  href="{{previous_page_url}}" justiffy="right"> Previous Page</a>
+<div class="container">
+	<div class="hm-footer-copyright text-center">
+		<div class="footer-social">
+			{% if previous_page_url %}
+				<a href="{{previous_page_url}}">Previous </a>
+			{% endif %}
+			 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<a href="#">Page: {{post_list.number}}</a>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			{% if next_page_url %}
+			<a href="{{next_page_url}}">Next </a>
+			{% endif %}
 
-						{% endif %}
-						{% if next_page_url %}
+		</div>
 
-
-								<a  href="{{next_page_url}}" justiffy="center"> Next Page</a>
-
-						{% endif %}
-
-				</div>
-</div>
+	</div><!--/.text-center-->
+</div><!--/.container-->
 
 
 

@@ -8,4 +8,5 @@ urlpatterns=[
     re_path(r'^delete/$',CartDelete.as_view(),name='empty_cart'),
     re_path(r'^shipping/$',ShippingView.as_view(),name='shipping'),
 
+
 ]

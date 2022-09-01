@@ -39,7 +39,7 @@
                   <tr>
                     <td data-src="{{product.product.image.url}}"><img
                              src="{{product.product.image.url}}" style="width:60px;" </img></td>
-                    <td style="width:150px; height:80px; vertical-align:center">{{product.product.name}}</td>
+                    <td style="width:150px; height:80px; vertical-align:center"><a href="{{product.product.get_absolute_url}}"> {{product.product.name}}</a></td>
                     <td>{{product.quantity}}</td>
                     <td>{{product.product.price}} $</td>
                     <td>{% widthratio product.product.price 1 product.quantity %} $</td>
@@ -80,7 +80,7 @@
                 </br>
                  <div class="col-lg-12" align="center">
                     <button class="btn-cart welcome-add-cart populer-products-btn" style="center" >
-                        <a href="{{post.get_absolute_url}}"> Continue</a>
+                        <a href="{% url 'shipping' %}"> Continue</a>
                     </button>
 
                 </div>

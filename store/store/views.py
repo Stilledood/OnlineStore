@@ -12,8 +12,9 @@ class GeneralView(View):
 
     def get(self,request):
         category_short_list=Category.objects.all()
-        new_arrivals=Product.objects.all()[:8]
+        new_arrivals=Product.objects.all()[:6]
         featured_products=Product.objects.filter(featured=True)
+
         latest_blog=Post.objects.all()[:3]
         banner_item1=featured_products[0]
         banner_item2=featured_products[1]
@@ -38,6 +39,7 @@ class GeneralView(View):
             'banner_item1':banner_item1,
             'banner_item2':banner_item2,
             'banner_item3':banner_item3,
+            'featured_products':featured_products,
             'cart_items':cart_items,
             'order':order
 
