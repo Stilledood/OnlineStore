@@ -93,6 +93,10 @@ TEMPLATES = [
         },
     },
 ]
+REST_FRAMEWORK={
+    'DEFAULT_PAGINATION_CLASS':'api.custompagination.CustomPagination',
+    'PAGE_SIZE':4
+}
 
 FIXTURE_DIRS=(os.path.join(BASE_DIR,'fixtures'),)
 
