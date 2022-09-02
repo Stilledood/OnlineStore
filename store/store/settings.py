@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'debug_toolbar',
     'crispy_forms',
     'rest_framework',
+    'django_filters',
     'onlinestore',
     'blog',
     'contact',
@@ -95,7 +96,12 @@ TEMPLATES = [
 ]
 REST_FRAMEWORK={
     'DEFAULT_PAGINATION_CLASS':'api.custompagination.CustomPagination',
-    'PAGE_SIZE':4
+    'PAGE_SIZE':4,
+    'DEFAULT_FILTER_BACKENDS':(
+        'django_filters.rest_framework.DjangoFilterBackend',
+        'rest_framework.filters.OrderingFilter',
+        'rest_framework.filters.SearchFilter'
+    )
 }
 
 FIXTURE_DIRS=(os.path.join(BASE_DIR,'fixtures'),)
