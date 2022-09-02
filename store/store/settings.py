@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'django.contrib.sitemaps',
     'debug_toolbar',
     'crispy_forms',
+    'rest_framework',
     'onlinestore',
     'blog',
     'contact',
@@ -54,6 +55,7 @@ INSTALLED_APPS = [
     'user',
     'cart',
     'shoppingcart',
+    'api'
 
 
 

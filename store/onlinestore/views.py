@@ -363,6 +363,24 @@ class ReviewDelete(View):
 
 
 
+def search_products(request):
+    model1=Product
+    model2=Category
+    template_name='onlinestore/search_result.html'
+
+    if request.method == 'POST':
+        searched=request.POST.get('searched')
+        print(searched)
+        if searched:
+            product_searched=model1.objects.filter(name__icontains=searched)
+            category_searched=model2.objects.filter(name__icontains=searched)
+            context_dict={
+                'products':product_searched,
+                'categories':category_searched
+            }
+            return render(request,template_name,context=context_dict)
+        else:
+            return redirect('post_list')
 
 
 

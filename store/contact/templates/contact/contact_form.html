@@ -1,3 +1,30 @@
-{% extends parent_template:default:'contact/contact_base.html'%}
+{% extends parent_template|default:'contact/contact_base.html'%}
+{% load crispy_forms_tags %}
 {% block content %}
+<br>
+</br>
+<br>
+</br>
+<br>
+</br>
+<section id="new-arrivals" class="new-arrivals">
+			<div class="container">
+				<div class="section-header">
+					<h2>Send Us An Email</h2>
+                </div>
+            </div>
+</section>
+<div class="container-fluid pt-7" align="center">
+        <div class="container pt-7">
+            <div class="row align-items-center" >
+                <form class="row g-3" action="{% url 'contact'%}" method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {{form|crispy}}
+                    <br>
+                    </br>
+                        <input type="submit" class="btn btn-primary" value="Submit">
+                </form>
+            </div>
+        </div>
+</div>
 {% endblock content %}

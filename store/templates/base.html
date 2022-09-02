@@ -73,9 +73,14 @@
 				        <div class="top-search">
 				            <div class="container">
 				                <div class="input-group">
-				                    <span class="input-group-addon"><i class="fa fa-search"></i></span>
-				                    <input type="text" class="form-control" placeholder="Search">
-				                    <span class="input-group-addon close-search"><i class="fa fa-times"></i></span>
+									<form action="{% url 'search' %}" method="post">
+										{% csrf_token %}
+
+											<input type="text" class="form-control"  name="searched">
+											<button  type="submit"><i class="fa fa-search"></i></button>
+									</form>
+
+
 				                </div>
 				            </div>
 				        </div>
@@ -140,7 +145,7 @@
 				                    <li class='nav-item'><a href="{% url 'category_list' %}">Categories</a></li>
 				                    <li class="nav_item"><a href="{% url 'product_list' %}">All Products</a></li>
 				                    <li class="nav_item"><a href="{% url 'post_list' %}">blog</a></li>
-				                    <li class="nav_item"><a href="#newsletter">contact</a></li>
+				                    <li class="nav_item"><a href="{% url 'contact' %}">contact</a></li>
 									{% if user.is_authenticated %}
 										<li class="nav_item"><a href="{% url 'dj-auth:profile_details' username=user.username %}">Profile</a></li>
 										<li class="nav_item"><a href="{% url 'dj-auth:logout' %}">Log Out</a></li>

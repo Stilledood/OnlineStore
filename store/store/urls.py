@@ -26,6 +26,8 @@ from .sitemaps import sitemaps
 from django.contrib.sitemaps.views import index,sitemap as sitemap_view
 from .views import GeneralView
 from shoppingcart import urls as cart_urls
+from contact import urls as contact_urls
+from api import urls as api_urls
 
 
 
@@ -43,8 +45,10 @@ urlpatterns = [
     re_path(r'^user/',include(user_urls,namespace='dj-auth')),
     re_path(r'^blog/',include(blog_urls)),
     re_path(r'^cart/',include(cart_urls)),
+    re_path(r'^contact/',include(contact_urls)),
     re_path(r'^sitenews/',include(sitenews)),
     re_path(r'^sitemap.xml$',sitemap_view,{'sitemaps':sitemaps},name='django.contrib.sitemaps.views.sitemap'),
+    re_path(r'^api/',include(api_urls))
 
 
 
