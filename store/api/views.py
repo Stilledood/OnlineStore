@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from .serializers import CategorySerializer,ProductSerializer,PostSerializer
-from rest_framework.generics import ListAPIView,RetrieveAPIView,RetrieveUpdateDestroyAPIView
+from rest_framework.generics import ListAPIView,RetrieveAPIView,RetrieveUpdateDestroyAPIView,GenericAPIView
 from onlinestore.models import Category,Product
 from blog.models import Post
 from rest_framework import filters
@@ -8,6 +8,25 @@ from django_filters import rest_framework as filters
 from .custompermision import CustomPermission
 from rest_framework import permissions
 from rest_framework.throttling import ScopedRateThrottle
+from rest_framework.reverse import reverse
+from rest_framework.response import Response
+
+
+
+class ApiRootView(GenericAPIView):
+
+    name='Store Api'
+
+    def get(self,request,*args,**kwargs):
+
+        return Response({
+            'product_categories':reverse('category-list',request=request),
+            'products':reverse('product-list',request=request),
+            'blogs':reverse('post-list',request=request)
+        })
+
+
+
 
 
 class CategoryList(ListAPIView):

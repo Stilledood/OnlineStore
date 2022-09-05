@@ -1,7 +1,8 @@
 from django.urls import path,re_path,include
-from .views import CategoryList,ProductDetails,CategoryDetails,ProductList,PostList,PostDetails
+from .views import CategoryList,ProductDetails,CategoryDetails,ProductList,PostList,PostDetails,ApiRootView
 
 urlpatterns=[
+    re_path(r'^$',ApiRootView.as_view(),name='api_root'),
     re_path(r'^categories/$',CategoryList.as_view(),name='category-list'),
     path('categories/<int:pk>/',CategoryDetails.as_view(),name='category-detail'),
     path('<int:pk>/',ProductDetails.as_view(),name='product-detail'),
