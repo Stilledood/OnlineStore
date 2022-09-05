@@ -7,6 +7,7 @@ from rest_framework import filters
 from django_filters import rest_framework as filters
 from .custompermision import CustomPermission
 from rest_framework import permissions
+from rest_framework.throttling import ScopedRateThrottle
 
 
 class CategoryList(ListAPIView):
@@ -53,6 +54,9 @@ class ProductList(ListAPIView):
     filter_fields = ('name','date_added')
     ordering_fields = ('name','date_added')
     permission_classes = (permissions.IsAuthenticated,)
+    throttle_classes = (ScopedRateThrottle,)
+    throttle_scope = 'products'
+
 
 
 class ProductDetails(RetrieveAPIView):
@@ -60,6 +64,8 @@ class ProductDetails(RetrieveAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
     permission_classes = (permissions.IsAuthenticated,)
+    throttle_classes = (ScopedRateThrottle,)
+    throttle_scope = 'products'
 
 class PostList(ListAPIView):
 

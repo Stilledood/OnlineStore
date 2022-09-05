@@ -106,6 +106,14 @@ REST_FRAMEWORK={
         'rest_framework.authentication.BasicAuthentication',
         'rest_framework.authentication.SessionAuthentication'
     ),
+    'DEFAULT_THROTTLE_CLASSES':(
+
+        'rest_framework.throttling.UserRateThrottle',
+    ),
+    'DEFAULT_THROTTLE_RATES':{
+        'user':'10/hour',
+        'products':'5/hour'
+    }
 }
 
 FIXTURE_DIRS=(os.path.join(BASE_DIR,'fixtures'),)
