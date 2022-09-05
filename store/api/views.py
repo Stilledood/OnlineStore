@@ -5,6 +5,8 @@ from onlinestore.models import Category,Product
 from blog.models import Post
 from rest_framework import filters
 from django_filters import rest_framework as filters
+from .custompermision import CustomPermission
+from rest_framework import permissions
 
 
 class CategoryList(ListAPIView):
@@ -14,12 +16,14 @@ class CategoryList(ListAPIView):
     search_fields = ('^name',)
     filter_fields = ('name',)
     ordering_fields = ('name',)
+    permission_classes = (permissions.IsAuthenticated,)
 
 
 class CategoryDetails(RetrieveAPIView):
 
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
+    permission_classes = (permissions.IsAuthenticated,)
 
 class CustomProductFilter(filters.FilterSet):
     '''Class to construcyt a personalized filter to sort product by date added '''
@@ -48,12 +52,14 @@ class ProductList(ListAPIView):
     search_fields = ('^name',)
     filter_fields = ('name','date_added')
     ordering_fields = ('name','date_added')
+    permission_classes = (permissions.IsAuthenticated,)
 
 
 class ProductDetails(RetrieveAPIView):
 
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
+    permission_classes = (permissions.IsAuthenticated,)
 
 class PostList(ListAPIView):
 
@@ -62,10 +68,12 @@ class PostList(ListAPIView):
     filter_fields = ('name','date_added',)
     search_fields = ('^name',)
     ordering_fields = ('name','date_added')
+    permission_classes = (permissions.IsAuthenticated,)
 
 class PostDetails(RetrieveAPIView):
 
     queryset = Post.objects.all()
     serializer_class = PostSerializer
+    permission_classes = (permissions.IsAuthenticated,CustomPermission)
 
 
