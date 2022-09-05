@@ -28,6 +28,7 @@ from .views import GeneralView
 from shoppingcart import urls as cart_urls
 from contact import urls as contact_urls
 from api import urls as api_urls
+from rest_framework import urls as rest_urls
 
 
 
@@ -48,7 +49,8 @@ urlpatterns = [
     re_path(r'^contact/',include(contact_urls)),
     re_path(r'^sitenews/',include(sitenews)),
     re_path(r'^sitemap.xml$',sitemap_view,{'sitemaps':sitemaps},name='django.contrib.sitemaps.views.sitemap'),
-    re_path(r'^api/',include(api_urls))
+    re_path(r'^api/',include(api_urls)),
+    path('api_auth/',include(rest_urls))
 
 
 

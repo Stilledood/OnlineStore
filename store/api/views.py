@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from .serializers import CategorySerializer,ProductSerializer,PostSerializer
-from rest_framework.generics import ListAPIView,RetrieveAPIView
+from rest_framework.generics import ListAPIView,RetrieveAPIView,RetrieveUpdateDestroyAPIView
 from onlinestore.models import Category,Product
 from blog.models import Post
 from rest_framework import filters
@@ -70,10 +70,10 @@ class PostList(ListAPIView):
     ordering_fields = ('name','date_added')
     permission_classes = (permissions.IsAuthenticated,)
 
-class PostDetails(RetrieveAPIView):
+class PostDetails(RetrieveUpdateDestroyAPIView):
 
     queryset = Post.objects.all()
     serializer_class = PostSerializer
-    permission_classes = (permissions.IsAuthenticated,CustomPermission)
+    permission_classes = (CustomPermission,permissions.IsAuthenticatedOrReadOnly)
 
 

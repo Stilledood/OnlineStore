@@ -8,6 +8,6 @@ class CustomPermission(permissions.BasePermission):
          if request.method is permissions.SAFE_METHODS:
              return True
          else:
-            return request.user == obj.author
+            return obj.author == request.user
 
 
