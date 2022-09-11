@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'rest_framework',
     'django_filters',
+    'whitenoise.runserver_nostatic',
     'onlinestore',
     'blog',
     'contact',
@@ -63,6 +64,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -113,7 +115,8 @@ REST_FRAMEWORK={
     'DEFAULT_THROTTLE_RATES':{
         'user':'10/hour',
         'products':'5/hour'
-    }
+    },
+    'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema'
 }
 
 FIXTURE_DIRS=(os.path.join(BASE_DIR,'fixtures'),)

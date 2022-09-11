@@ -894,6 +894,7 @@ span.feature-review {margin-left: 10px;}
 .footer {
     background: #f8f9fd;
     display: flex;
+    position:absolute;
     align-items: center;
     height: 154px;
 }
@@ -901,6 +902,7 @@ span.feature-review {margin-left: 10px;}
     color: #a5adb3;
     font-size: 14px;
     font-weight: 400;
+    position:bottom;
 }
 .footer-social a i {
     color: #a4aaaf;
@@ -910,6 +912,7 @@ span.feature-review {margin-left: 10px;}
     -ms-transition:.3s; 
     -o-transition:.3s;
     transition: .3s;
+    position:absolute;
 }
 .footer-social i:hover{color: #e99c2e;}
 

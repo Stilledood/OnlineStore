@@ -153,6 +153,7 @@
 										<li class="nav_link active"><a href="{% url 'dj-auth:login' %}?next={{request.path}}">Log In</a></li>
 										<li class="nav_item"><a href="{% url 'dj-auth:signup'  %}">Register</a></li>
 									{% endif %}
+									<li class="nav_item"><a href="{% url 'api_root' %}">Api</a></li>
 
 				                </ul><!--/.nav -->
 				            </div><!-- /.navbar-collapse -->
@@ -508,7 +509,7 @@
 
 
 		<!--footer start-->
-<footer id="footer"  class="footer">
+<footer id="footer"  class="footer" style="position: fixed; bottom: 0; width: 100%;">
     <div class="container">
         <div class="hm-footer-copyright text-center">
             <div class="footer-social">
@@ -519,7 +520,7 @@
                 <a href="#"><i class="fa fa-behance"></i></a>
             </div>
             <p>
-                &copy;copyright. designed and developed by <a href="https://www.themesine.com/">themesine</a>
+                &copy;copyright. designed and developed by <a href="https://www.themesine.com/">IFurniture</a>
             </p><!--/p-->
         </div><!--/.text-center-->
     </div><!--/.container-->

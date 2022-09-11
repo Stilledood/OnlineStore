@@ -29,7 +29,7 @@ urlpatterns=[
     re_path(r'^login/$',auth_views.LoginView.as_view(template_name='user/login.html',authentication_form=AuthenticationForm),name='login'),
     re_path(r'^logout/$',auth_views.LogoutView.as_view(template_name='user/logout.html',extra_context={'form':AuthenticationForm}),name='logout'),
     re_path(r'^password/',include(password_urls)),
-    re_path(r'^dissable/$',DisableAccount.as_view(),name='dissable_account'),
+    re_path(r'^disable/$',DisableAccount.as_view(),name='disable_account'),
     re_path(r'^signup/$',SignUp.as_view(),name='signup'),
     path('activate/<uidb64>/<token>/',AccountActivation.as_view(),name='account_activation'),
     re_path(r'^(?P<username>[\w\-]+)/$',ProfileDetails.as_view(),name='profile_details'),

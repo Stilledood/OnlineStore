@@ -1,9 +1,26 @@
 {% extends parent_template|default:'user/base_user.html' %}
 {% block content %}
-<h3>Dissable Account</h3>
-<form action="{% url 'dj-auth:dissable_account' %}"
-      method="post">
-    {% csrf_token %}
-    <button type="submit">Dissable Account</button>
-</form>
+
+<br>
+</br>
+<br>
+</br>
+<br>
+</br>
+<br>
+</br>
+<div class="container-fluid pt-7" align="center">
+        <div class="container pt-7">
+            <div class="row align-items-center" >
+                <form class="row g-3" action="{% url 'dj-auth:disable_account' %}" method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+
+                    <br>
+                    </br>
+                        <input type="submit" class="btn btn-primary" value="Delete Account">
+                </form>
+            </div>
+        </div>
+</div>
+
 {% endblock content %}

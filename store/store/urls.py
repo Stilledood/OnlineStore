@@ -29,6 +29,10 @@ from shoppingcart import urls as cart_urls
 from contact import urls as contact_urls
 from api import urls as api_urls
 from rest_framework import urls as rest_urls
+from rest_framework.schemas import get_schema_view
+from rest_framework.documentation import include_docs_urls
+
+schema_view=get_schema_view(title='Store Api',url='https://127.0.0.1:8000/schema/')
 
 
 
@@ -50,7 +54,9 @@ urlpatterns = [
     re_path(r'^sitenews/',include(sitenews)),
     re_path(r'^sitemap.xml$',sitemap_view,{'sitemaps':sitemaps},name='django.contrib.sitemaps.views.sitemap'),
     re_path(r'^api/',include(api_urls)),
-    path('api_auth/',include(rest_urls))
+    path('api_auth/',include(rest_urls)),
+    path('schema/',schema_view),
+    path('docs/',include_docs_urls(title='Store Api'))
 
 
 

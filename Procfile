@@ -1,0 +1,1 @@
+web: gunicorn --pythonpath OnlineStore store.wsgi:application --log-file - --log-level debug
