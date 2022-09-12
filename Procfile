@@ -1,1 +1,1 @@
-web: gunicorn --pythonpath Onlinestore.store.store.wsgi:application --log-file - --log-level debug
+web: gunicorn --pythonpath store.store.wsgi:application --log-file - --log-level debug
