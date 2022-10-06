@@ -316,30 +316,27 @@
 			</div><!--/#header-carousel-->
 
 <!--populer-products start -->
-		<section id="populer-products" class="populer-products">
-			<div class="container">
-				<div class="populer-products-content">
-					<div class="row">
-						{% for category in category_list %}
+<section id="clients"  class="clients">
 
-						<div class="col-md-3">
+    <div class="container">
+        <div class="owl-carousel owl-theme" id="client">
+            {% for category in category_list %}
+                <div class="item">
+                    <a href="#">
+                        <img src="{{category.image.url}}" alt="brand-image" />
+                        <a href="{{category.get_absolute_url}}" >{{category.name}}</a>
+                    </a>
+                </div><!--/.item-->
+            {% endfor %}
+            </div><!--/.owl-carousel-->
 
-							<div class="single-populer-products">
-								<div class="single-populer-product-img mt40" >
-									<img src="{{category.image.url}}" alt="populer-products images" align="justify">
-								</div>
-								<h2><a href="#">{{category.name}}</a></h2>
-								<div class="single-populer-products-para">
+    </div><!--/.container-->
 
-								</div>
-							</div>
-
-						</div>
-						{% endfor %}
+</section><!--/.clients-->
 						<div class="section-header">
-							<button >
-								<li class=" scroll active"><a href="#home">View All Categories</a></li>
-							</button>
+
+							<h2><a href="{% url 'category_list' %}">View All Categories</a></h2>
+
 
 						</div><!--/.section-header-->
 
